@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Проекты — Visual Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html" aria-label="Visual Physics home">
+      <img class="brand__logo" src="assets/logotip.jpeg" alt="Visual Physics logo">
+      <span class="brand__name">Visual Physics</span>
+    </a>
+    <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <a class="btn" href="team.html" data-i18n="nav.team">О нашей команде</a>
+      <a class="btn" href="object.html" data-i18n="nav.projects">О наших проектах</a>
+      <a class="btn" href="index.html#support" data-i18n="nav.support">Поддержать проект</a>
+      <a class="btn btn--primary" href="contacts.html" data-i18n="nav.cta">Оставить заявку для вашей школы</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container page">
+  <span class="contact-badge reveal" data-i18n="ob.badge">Каталог моделей</span>
+  <h1 class="reveal" data-i18n="ob.h1">Проекты и учебные модели</h1>
+  <p class='sub reveal' data-i18n="ob.sub">Готовые физические установки для школьного класса. Каждая модель показывает один принцип — наглядно, безопасно и без специального оборудования.</p>
+  <div class="catalog-tools reveal" aria-label="Фильтр моделей">
+    <div class="catalog-filters" role="group" aria-label="Выберите тему физики">
+      <button class="catalog-filter is-active" type="button" data-filter="all" aria-pressed="true" data-i18n="ob.filterAll">Все модели</button>
+      <button class="catalog-filter" type="button" data-filter="mechanics" aria-pressed="false" data-i18n="ob.filterMech">Механика</button>
+      <button class="catalog-filter" type="button" data-filter="archimedes" aria-pressed="false" data-i18n="ob.filterArch">Архимед</button>
+      <button class="catalog-filter" type="button" data-filter="thermo" aria-pressed="false" data-i18n="ob.filterThermo">Термодинамика</button>
+      <button class="catalog-filter" type="button" data-filter="density" aria-pressed="false" data-i18n="ob.filterDensity">Плотность</button>
+    </div>
+    <span class="catalog-count"><b data-catalog-count>6</b> <span data-i18n="ob.count">моделей в каталоге</span></span>
+  </div>
+  <div class="card card--wide reveal">
+<div class="models" data-model-catalog>
+<!-- ____________________________________________________________ -->
+<article class="model" data-topic="mechanics">
+<img alt="photo" class="model__img" src="modelki/stul.png"/>
+<div class="model__body">
+<h2 class="model__title" data-i18n="ob.t1">Стул с шариками</h2>
+<div class="model__meta">
+<span class="chip" data-i18n="dtopic.mech">Тема: Механика</span>
+</div>
+<p class="model__desc" data-i18n="ob.d1">Наглядная инерция и законы Ньютона: основание резко движется, а шарики «отстают».</p>
+<div class="model__actions">
+<a class="btn" href="stuldetail.html" data-i18n="proj.more">Подробнее</a>
+</div>
+</div>
+</article>
+<!-- ____________________________________________________________ -->
+<article class="model" data-topic="archimedes">
+<img alt="photo" class="model__img" src="modelki/gruziki.png"/>
+<div class="model__body">
+<h2 class="model__title" data-i18n="ob.t2">Вес тела в жидкости (сила Архимеда)</h2>
+<div class="model__meta">
+<span class="chip" data-i18n="dtopic.arch">Тема: Закон Архимеда</span>
+</div>
+<p class="model__desc" data-i18n="ob.d2">Груз взвешивают в воздухе и в воде — разница и есть выталкивающая сила Архимеда.</p>
+<div class="model__actions">
+<a class="btn" href="gruzikidetail.html" data-i18n="proj.more">Подробнее</a>
+</div>
+</div>
+</article>
+<!-- ____________________________________________________________ -->
+<article class="model" data-topic="thermo">
+<img alt="photo" class="model__img" src="modelki/brownstol.png"/>
+<div class="model__body">
+<h2 class="model__title" data-i18n="ob.t3">Гранулярная динамика: Броуновское движение</h2>
+<div class="model__meta">
+<span class="chip" data-i18n="dtopic.thermo">Тема: Термодинамика</span>
+</div>
+<p class="model__desc" data-i18n="ob.d3">Шарики на вибростоле движутся хаотично, как молекулы — модель теплового движения.</p>
+<div class="model__actions">
+<a class="btn" href="brownstoldetail.html" data-i18n="proj.more">Подробнее</a>
+</div>
+</div>
+</article>
+<!-- ____________________________________________________________ -->
+<article class="model" data-topic="mechanics">
+<img alt="photo" class="model__img" src="modelki/kolesomodel.png"/>
+<div class="model__body">
+<h2 class="model__title" data-i18n="ob.t4">Велоколесо на раме</h2>
+<div class="model__meta">
+<span class="chip" data-i18n="dtopic.mech">Тема: Механика</span>
+</div>
+<p class="model__desc" data-i18n="ob.d4">Гироскопический эффект: раскрученное колесо сопротивляется наклону оси.</p>
+<div class="model__actions">
+<a class="btn" href="kolesodetail.html" data-i18n="proj.more">Подробнее</a>
+</div>
+</div>
+</article>
+<!-- ____________________________________________________________ -->
+<article class="model" data-topic="mechanics">
+<img alt="photo" class="model__img" src="modelki/blokverevka.png"/>
+<div class="model__body">
+<h2 class="model__title" data-i18n="ob.t5">Стул с верёвкой и блоками — блочная система</h2>
+<div class="model__meta">
+<span class="chip" data-i18n="dtopic.mech">Тема: Механика</span>
+</div>
+<p class="model__desc" data-i18n="ob.d5">Система блоков даёт выигрыш в силе — наглядное золотое правило механики.</p>
+<div class="model__actions">
+<a class="btn" href="blokverevkadetail.html" data-i18n="proj.more">Подробнее</a>
+</div>
+</div>
+</article>
+<!-- ____________________________________________________________ -->
+<article class="model" data-topic="density">
+<img alt="photo" class="model__img" src="modelki/naborgruzikov.png"/>
+<div class="model__body">
+<h2 class="model__title" data-i18n="ob.t6">Набор металлических грузов — плотность</h2>
+<div class="model__meta">
+<span class="chip" data-i18n="dtopic.density">Тема: Плотность</span>
+</div>
+<p class="model__desc" data-i18n="ob.d6">Грузы равного объёма из разных металлов: разная масса — разная плотность.</p>
+<div class="model__actions">
+<a class="btn" href="naborgruzikovdetail.html" data-i18n="proj.more">Подробнее</a>
+</div>
+</div>
+</article>
+</div>
+</div></div>
+
+<footer class="footer">
+  <div class="container footer__row">
+    <div>
+      <div style="font-weight:800;color:var(--text);margin-bottom:6px">Visual Physics</div>
+      <div class="small" data-i18n="footer.tagline">Наша цель - сделать физику понятной через визуальные модели, симуляции и эксперименты.</div>
+    </div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap">
+      <a href="team.html" data-i18n="footer.team">О нашей команде</a>
+      <a href="object.html" data-i18n="footer.projects">О наших проектах</a>
+      <a href="index.html#support" data-i18n="footer.support">Поддержать проект</a>
+      <a href="contacts.html" data-i18n="footer.request">Оставить заявку</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

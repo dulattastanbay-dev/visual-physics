@@ -1,0 +1,15 @@
+{
+  "name": "visual-physics-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend для Visual Physics: база заявок (SQLite) + уведомления в Telegram + ИИ чат-бот. Без внешних npm-зависимостей.",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env --no-warnings server.js",
+    "dev": "node --env-file-if-exists=.env --no-warnings --watch server.js",
+    "chat-id": "node --env-file-if-exists=.env --no-warnings get-chat-id.js"
+  }
+}

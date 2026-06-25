@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Заявка — Visual Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html" aria-label="Visual Physics home">
+      <img class="brand__logo" src="assets/logotip.jpeg" alt="Visual Physics logo">
+      <span class="brand__name">Visual Physics</span>
+    </a>
+    <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <a class="btn" href="team.html" data-i18n="nav.team">О нашей команде</a>
+      <a class="btn" href="object.html" data-i18n="nav.projects">О наших проектах</a>
+      <a class="btn" href="index.html#support" data-i18n="nav.support">Поддержать проект</a>
+      <a class="btn btn--primary" href="contacts.html" data-i18n="nav.cta">Оставить заявку для вашей школы</a>
+    </nav>
+  </div>
+</header>
+
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-layout">
+
+      <div class="contact-info">
+        <div class="contact-badge" data-i18n="c.badge">Для школ</div>
+        <h1 class="contact-title" data-i18n-html="c.title">Оставьте заявку<br>для вашей школы</h1>
+        <p class="contact-desc" data-i18n="c.desc">Расскажем про модели, подберём набор под ваши классы и составим план запуска. Это ни к чему не обязывает.</p>
+
+        <div class="contact-perks">
+          <div class="perk">
+            <div class="perk__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <div class="perk__title" data-i18n="c.perk1t">Подбор под программу</div>
+              <div class="perk__sub" data-i18n="c.perk1s">Модели под нужные темы и классы</div>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <div class="perk__title" data-i18n="c.perk2t">Установка в классе</div>
+              <div class="perk__sub" data-i18n="c.perk2s">Монтируем и обучаем учителей</div>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <div class="perk__title" data-i18n="c.perk3t">Быстрый ответ</div>
+              <div class="perk__sub" data-i18n="c.perk3s">Свяжемся в течение пары дней</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card__head">
+          <div class="contact-card__title" data-i18n="c.cardTitle">Оставить заявку</div>
+          <div class="contact-card__sub" data-i18n="c.cardSub">Заполните форму — мы перезвоним</div>
+        </div>
+
+        <form class="contact-form" action="thanks.html" method="POST" name="lead" id="leadForm" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="lead" />
+          <input type="hidden" name="source" id="lead-source" value="" />
+          <p style="display:none" aria-hidden="true">
+            <label>Не заполняйте<input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label" for="lead-name"><span data-i18n="c.name">Имя</span> <span class="cf-req">*</span></label>
+              <input class="cf-input" id="lead-name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="cf-field">
+              <label class="cf-label" for="lead-phone"><span data-i18n="c.phone">Телефон</span> <span class="cf-req">*</span></label>
+              <input class="cf-input" id="lead-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 ___ ___ __ __" required />
+            </div>
+          </div>
+
+          <div class="cf-field">
+            <label class="cf-label" for="lead-school" data-i18n="c.school">Название школы</label>
+            <input class="cf-input" id="lead-school" name="school" type="text" autocomplete="organization" />
+          </div>
+
+          <div class="cf-field">
+            <label class="cf-label" for="lead-role" data-i18n="c.role">Ваша роль</label>
+            <select class="cf-input cf-select" id="lead-role" name="role">
+              <option value="" disabled selected data-i18n="c.roleSelect">Выберите роль</option>
+              <option value="teacher" data-i18n="c.roleTeacher">Учитель физики</option>
+              <option value="director" data-i18n="c.roleDirector">Директор / завуч</option>
+              <option value="parent" data-i18n="c.roleParent">Родитель</option>
+              <option value="other" data-i18n="c.roleOther">Другое</option>
+            </select>
+          </div>
+
+          <div class="cf-field">
+            <label class="cf-label" for="lead-message"><span data-i18n="c.msg">Сообщение</span> <span class="cf-opt" data-i18n="c.msgOpt">(необязательно)</span></label>
+            <textarea class="cf-input cf-textarea" id="lead-message" name="message" data-i18n-ph="c.msgPh" placeholder="Например: интересуют модели по механике для 8–9 классов"></textarea>
+          </div>
+
+          <button class="cf-submit" type="submit">
+            <span class="cf-submit__label" data-i18n="c.submit">Отправить заявку</span>
+            <svg class="cf-submit__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <span class="cf-spinner" aria-hidden="true"></span>
+          </button>
+
+          <div class="cf-status" id="leadStatus" role="status" aria-live="polite"></div>
+          <div class="cf-note" data-i18n="c.note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer__row">
+    <div>
+      <div style="font-weight:800;color:var(--text);margin-bottom:6px">Visual Physics</div>
+      <div class="small" data-i18n="footer.tagline">Наша цель - сделать физику понятной через визуальные модели, симуляции и эксперименты.</div>
+    </div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap">
+      <a href="team.html" data-i18n="footer.team">О нашей команде</a>
+      <a href="object.html" data-i18n="footer.projects">О наших проектах</a>
+      <a href="index.html#support" data-i18n="footer.support">Поддержать проект</a>
+      <a href="contacts.html" data-i18n="footer.request">Оставить заявку</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

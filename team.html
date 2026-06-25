@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Команда — Visual Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html" aria-label="Visual Physics home">
+      <img class="brand__logo" src="assets/logotip.jpeg" alt="Visual Physics logo">
+      <span class="brand__name">Visual Physics</span>
+    </a>
+    <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <a class="btn" href="team.html" data-i18n="nav.team">О нашей команде</a>
+      <a class="btn" href="object.html" data-i18n="nav.projects">О наших проектах</a>
+      <a class="btn" href="index.html#support" data-i18n="nav.support">Поддержать проект</a>
+      <a class="btn btn--primary" href="contacts.html" data-i18n="nav.cta">Оставить заявку для вашей школы</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container page">
+
+  <section class="team-hero">
+    <div class="team-hero__copy">
+  <span class="contact-badge reveal" data-i18n="tm.badge">Команда Visual Physics</span>
+  <h2 class="reveal" style="margin:10px 0 8px;font-family:'Manrope',system-ui,sans-serif;font-size:30px;font-weight:400" data-i18n="tm.h2">О нашей команде</h2>
+  <p class="reveal" data-i18n="tm.intro" style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:18px;max-width:640px">
+    Visual Physics создаёт небольшая команда энтузиастов: проектировщики моделей, разработчики,
+    финансы и SMM. Каждый отвечает за свой участок — от идеи и инженерии до запуска моделей в школах.
+  </p>
+
+  <div class="team-stats reveal">
+    <div class="team-stat"><b data-count="5">5</b><span data-i18n="tm.stat1">участников</span></div>
+    <div class="team-stat"><b data-count="6">6</b><span data-i18n="tm.stat2">моделей</span></div>
+    <div class="team-stat"><b data-count="3">3</b><span data-i18n="tm.stat3">школы-партнёра</span></div>
+  </div>
+    </div>
+    <div class="team-hero__visual" aria-hidden="true">
+      <span class="team-hero__orbit team-hero__orbit--one"></span>
+      <span class="team-hero__orbit team-hero__orbit--two"></span>
+      <span class="team-hero__orbit team-hero__orbit--three"></span>
+      <span class="team-hero__core">VP</span>
+      <span class="team-hero__node team-hero__node--one"></span>
+      <span class="team-hero__node team-hero__node--two"></span>
+      <span class="team-hero__node team-hero__node--three"></span>
+    </div>
+  </section>
+  <section class="team-roster">
+    <div class="team-roster__head"><span>TEAM / 05</span></div>
+  <div class="sc-wrap">
+    <button class="sc-arrow sc-arrow--left" id="teamLeft" type="button" aria-label="Предыдущий участник">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <div class="sc-viewport">
+      <div class="sc-track" id="teamTrack">
+
+        <div class="sc-card team-member">
+          <img class="tc-photo" src="assets/mate1.png" alt="Пилявский Дмитрий" loading="lazy">
+          <div class="sc-name" data-i18n="tm.n1">Пилявский Дмитрий</div>
+          <div class="sc-sub" data-i18n="tm.r1">Руководитель проекта &amp; Проектировщик</div>
+          <p class="tc-desc" data-i18n="tm.d1">Ведёт проект и отвечает за инженерную часть моделей.</p>
+        </div>
+
+        <div class="sc-card team-member">
+          <img class="tc-photo tc-photo--dulat" src="assets/team-dulat-tastanbay.png" alt="Дулат Тастанбай" loading="lazy">
+          <div class="sc-name" data-i18n="tm.n2">Дулат Тастанбай</div>
+          <div class="sc-sub" data-i18n="tm.r2">IT &amp; Веб-разработка</div>
+          <p class="tc-desc" data-i18n="tm.d2">Разработка и поддержка сайта, чат-бота и базы заявок.</p>
+        </div>
+
+        <div class="sc-card team-member">
+          <img class="tc-photo tc-photo--omirbek" src="assets/team-omirbek-tungyshbek.png" alt="Омирбек Тунгышбек" loading="lazy">
+          <div class="sc-name" data-i18n="tm.n3">Омирбек Тунгышбек</div>
+          <div class="sc-sub" data-i18n="tm.r3">Проектировщик</div>
+          <p class="tc-desc" data-i18n="tm.d3">Проектирует и собирает физические модели для школ.</p>
+        </div>
+
+        <div class="sc-card team-member">
+          <img class="tc-photo" src="assets/mate8.png" alt="Нуркенова Елнур" loading="lazy">
+          <div class="sc-name" data-i18n="tm.n4">Нуркенова Елнур</div>
+          <div class="sc-sub" data-i18n="tm.r4">SMM &amp; Проектировщик</div>
+          <p class="tc-desc" data-i18n="tm.d4">Соцсети, контент и участие в проектировании моделей.</p>
+        </div>
+
+        <div class="sc-card team-member">
+          <img class="tc-photo" src="assets/mate6.png" alt="Эльдана Мулкибаева" loading="lazy">
+          <div class="sc-name" data-i18n="tm.n5">Эльдана Мулкибаева</div>
+          <div class="sc-sub" data-i18n="tm.r5">Финансы &amp; Закупки</div>
+          <p class="tc-desc" data-i18n="tm.d5">Бюджет, закупки материалов и снабжение команды.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <button class="sc-arrow sc-arrow--right" id="teamRight" type="button" aria-label="Следующий участник">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+  <div class="sc-dots" id="teamDots" aria-hidden="true"></div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="container footer__row">
+    <div>
+      <div style="font-weight:800;color:var(--text);margin-bottom:6px">Visual Physics</div>
+      <div class="small" data-i18n="footer.tagline">Наша цель — сделать физику понятной через визуальные модели, симуляции и эксперименты.</div>
+    </div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap">
+      <a href="team.html" data-i18n="footer.team">О нашей команде</a>
+      <a href="object.html" data-i18n="footer.projects">О наших проектах</a>
+      <a href="index.html#support" data-i18n="footer.support">Поддержать проект</a>
+      <a href="contacts.html" data-i18n="footer.request">Оставить заявку</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

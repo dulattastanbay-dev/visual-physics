@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Подробнее - Visual Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html" aria-label="Visual Physics home">
+      <img class="brand__logo" src="assets/logotip.jpeg" alt="Visual Physics logo">
+      <span class="brand__name">Visual Physics</span>
+    </a>
+    <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <a class="btn" href="team.html" data-i18n="nav.team">О нашей команде</a>
+      <a class="btn" href="object.html" data-i18n="nav.projects">О наших проектах</a>
+      <a class="btn" href="index.html#support" data-i18n="nav.support">Поддержать проект</a>
+      <a class="btn btn--primary" href="contacts.html" data-i18n="nav.cta">Оставить заявку для вашей школы</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container page">
+  <a class="back-link" href="object.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span data-i18n="detail.back">Все проекты</span>
+  </a>
+
+  <div class="detail">
+    <div class="detail__media reveal">
+      <img src="modelki/naborgruzikov.png" alt="Набор металлических грузов — плотность" class="detail__img" loading="lazy">
+    </div>
+    <div class="detail__head reveal">
+      <span class="chip" data-i18n="dtopic.density">Тема: Плотность</span>
+      <h1 class="detail__title" data-i18n="dna.title">Набор металлических грузов</h1>
+      <p class="detail__lead" data-i18n="dna.lead">Грузы одинакового объёма, но из разных металлов, весят по-разному. Сравнивая массу, ученики «нащупывают», что такое плотность вещества.</p>
+      <div class="detail__principle">
+        <span class="detail__principle-label" data-i18n="detail.principleLabel">Принцип</span>
+        <span class="detail__principle-value" data-i18n="dna.prin">Плотность вещества</span>
+      </div>
+      <a class="btn btn--primary" href="contacts.html" data-i18n="nav.cta">Хочу такую модель в школу</a>
+    </div>
+  </div>
+
+  <div class="detail-grid">
+    <section class="detail-block reveal">
+      <h2 data-i18n="detail.shows">Что показывает модель</h2>
+      <p data-i18n="dna.p1">Возьмите два одинаковых по размеру кубика — из алюминия и из стали. На вид они похожи, но в руке ощущаются совершенно по-разному. Причина — разная плотность: в одном и том же объёме «упаковано» разное количество вещества.</p>
+    </section>
+    <section class="detail-block reveal">
+      <h2 data-i18n="detail.physics">Физика простыми словами</h2>
+      <p data-i18n="dna.p2">Плотность — это «насколько тяжёлый» материал при равном объёме. Она помогает отличать металлы, проверять состав сплавов и понимать, почему свинцовый шарик тонет, а такой же по размеру деревянный — плавает.</p>
+    </section>
+    <section class="detail-block detail-formula reveal">
+      <h2 data-i18n="detail.formula">Формула</h2>
+      <div class="formula">ρ = m / V</div>
+      <p data-i18n="dna.p3">Плотность ρ равна массе m, делённой на объём V. Зная массу и объём груза, можно вычислить плотность и по таблице определить, из какого металла он сделан.</p>
+    </section>
+    <section class="detail-block reveal">
+      <h2 data-i18n="detail.students">Что делают ученики</h2>
+      <ul class="detail-list">
+        <li data-i18n="dna.l1">Взвешивают грузы и измеряют их объём</li>
+        <li data-i18n="dna.l2">Вычисляют плотность каждого образца</li>
+        <li data-i18n="dna.l3">Определяют металл по таблице плотностей</li>
+      </ul>
+    </section>
+  </div>
+
+  <section class="detail-takeaways reveal">
+    <h2 data-i18n="detail.learns">Чему учит</h2>
+    <div class="takeaways">
+      <div class="takeaway"><b data-i18n="dna.k1t">Плотность</b><span data-i18n="dna.k1s">Свойство вещества, а не размера</span></div>
+      <div class="takeaway"><b data-i18n="dna.k2t">Связь m, V, ρ</b><span data-i18n="dna.k2s">Как они зависят друг от друга</span></div>
+      <div class="takeaway"><b data-i18n="dna.k3t">Распознавание</b><span data-i18n="dna.k3s">Определение материала по расчёту</span></div>
+    </div>
+  </section>
+
+  <div class="detail-cta reveal">
+    <div>
+      <div class="detail-cta__title" data-i18n="detail.ctaTitle">Понравилась модель?</div>
+      <div class="detail-cta__sub" data-i18n="detail.ctaSub">Установим её в вашей школе и покажем учителям, как использовать на уроках.</div>
+    </div>
+    <a class="btn btn--primary" href="contacts.html" data-i18n="nav.cta">Оставить заявку</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer__row">
+    <div>
+      <div style="font-weight:800;color:var(--text);margin-bottom:6px">Visual Physics</div>
+      <div class="small" data-i18n="footer.tagline">Наша цель - сделать физику понятной через визуальные модели, симуляции и эксперименты.</div>
+    </div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap">
+      <a href="team.html" data-i18n="footer.team">О нашей команде</a>
+      <a href="object.html" data-i18n="footer.projects">О наших проектах</a>
+      <a href="index.html#support" data-i18n="footer.support">Поддержать проект</a>
+      <a href="contacts.html" data-i18n="footer.request">Оставить заявку</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

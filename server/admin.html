@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Заявки — Visual Physics (админка)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    body { background: var(--bg-tint); }
+    .adm { max-width: 1100px; margin: 0 auto; padding: 32px 20px 64px; }
+    .adm h1 { font-family: 'Manrope', system-ui, sans-serif; font-weight: 400; margin: 0 0 4px; }
+    .adm__bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 18px 0 22px; }
+    .adm__bar input { max-width: 280px; }
+    .adm__stat { margin-left: auto; font-weight: 700; color: var(--navy); }
+    .tbl-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; background: #fff; box-shadow: var(--shadow-sm); }
+    table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+    th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--navy-pale); color: var(--navy); font-weight: 700; position: sticky; top: 0; }
+    tr:hover td { background: #f8fafc; }
+    .muted { color: var(--muted); font-size: 12.5px; }
+    .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+    .pill--ok { background: #dcfce7; color: #166534; }
+    .pill--no { background: #fee2e2; color: #991b1b; }
+    .empty { padding: 40px; text-align: center; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="adm">
+    <h1>Заявки</h1>
+    <p class="muted">Visual Physics — поступившие заявки из формы на сайте.</p>
+
+    <div class="adm__bar">
+      <input class="cf-input" id="token" type="password" placeholder="ADMIN_TOKEN" />
+      <button class="btn btn--primary" id="load" type="button">Показать</button>
+      <span class="adm__stat" id="stat"></span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>Когда</th><th>Имя</th><th>Телефон</th>
+            <th>Школа</th><th>Роль</th><th>Источник</th><th>TG</th>
+          </tr>
+        </thead>
+        <tbody id="rows">
+          <tr><td colspan="8" class="empty">Введите ADMIN_TOKEN и нажмите «Показать».</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const $ = s => document.querySelector(s);
+    const ROLE = { teacher:'Учитель физики', director:'Директор / завуч', parent:'Родитель', other:'Другое' };
+    const esc = s => String(s ?? '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+    function fmt(iso){ try { return new Date(iso).toLocaleString('ru-RU'); } catch { return iso || ''; } }
+
+    async function load(){
+      const token = $('#token').value.trim();
+      if(!token){ $('#token').focus(); return; }
+      localStorage.setItem('vp_admin_token', token);
+      $('#stat').textContent = 'Загрузка…';
+      try{
+        const r = await fetch('/api/leads?token=' + encodeURIComponent(token));
+        const data = await r.json();
+        if(!data.ok){ $('#stat').textContent = ''; $('#rows').innerHTML = `<tr><td colspan="8" class="empty">${esc(data.error||'Ошибка')}</td></tr>`; return; }
+        $('#stat').textContent = 'Всего: ' + data.count;
+        if(!data.leads.length){ $('#rows').innerHTML = '<tr><td colspan="8" class="empty">Заявок пока нет.</td></tr>'; return; }
+        $('#rows').innerHTML = data.leads.map(l => `
+          <tr>
+            <td>${l.id}</td>
+            <td class="muted">${fmt(l.created_at)}</td>
+            <td><b>${esc(l.name)}</b></td>
+            <td>${esc(l.phone)}</td>
+            <td>${esc(l.school) || '<span class="muted">—</span>'}</td>
+            <td>${esc(ROLE[l.role] || l.role) || '<span class="muted">—</span>'}</td>
+            <td class="muted">${esc(l.source) || '—'}</td>
+            <td>${l.telegram_sent ? '<span class="pill pill--ok">да</span>' : '<span class="pill pill--no">нет</span>'}</td>
+          </tr>`).join('');
+      }catch(e){ $('#stat').textContent = ''; $('#rows').innerHTML = `<tr><td colspan="8" class="empty">Сеть недоступна</td></tr>`; }
+    }
+
+    $('#load').addEventListener('click', load);
+    $('#token').addEventListener('keydown', e => { if(e.key === 'Enter') load(); });
+    const saved = localStorage.getItem('vp_admin_token');
+    if(saved){ $('#token').value = saved; load(); }
+  </script>
+</body>
+</html>
