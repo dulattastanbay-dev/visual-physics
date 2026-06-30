@@ -3429,25 +3429,40 @@ body::before {
 /* Отступ снизу, чтобы плавающее меню (dock) и чат не перекрывали нижний контент */
 body { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
 
-
-/* «Живой» логотип партнёра: парение + блик + подъём при наведении */
-.partner-card { position: relative; overflow: hidden; transition: transform .35s ease, box-shadow .35s ease; }
+/* «Живой» логотип партнёра: лёгкое парение + реакция при наведении */
+.partner-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease, border-color .4s ease;
+}
 .partner-card::after {
   content: '';
   position: absolute;
-  top: 0; left: -70%;
-  width: 55%; height: 100%;
-  background: linear-gradient(105deg, transparent 0%, rgba(99,102,241,.16) 50%, transparent 100%);
+  top: 0; left: -75%;
+  width: 60%; height: 100%;
+  background: linear-gradient(105deg, transparent 0%, rgba(99,102,241,.22) 50%, transparent 100%);
   transform: skewX(-18deg);
   pointer-events: none;
-  animation: partnerShine 5.5s ease-in-out infinite;
 }
-.partner-card:hover { transform: translateY(-6px); box-shadow: 0 28px 64px rgba(55,62,120,.20); }
-.partner-logo { position: relative; z-index: 1; animation: partnerFloat 4.5s ease-in-out infinite; will-change: transform; }
-.partner-card:hover .partner-logo { animation-play-state: paused; }
+.partner-logo {
+  position: relative;
+  z-index: 1;
+  animation: partnerFloat 4.5s ease-in-out infinite;
+  will-change: transform;
+  transition: filter .4s ease;
+}
+/* реакция при наведении */
+.partner-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  border-color: rgba(99,102,241,.45);
+  box-shadow: 0 30px 70px rgba(79,70,229,.26);
+}
+.partner-card:hover .partner-logo { filter: drop-shadow(0 8px 16px rgba(79,70,229,.22)); }
+.partner-card:hover::after { animation: partnerShine 0.9s ease-out; }
 @keyframes partnerFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-@keyframes partnerShine { 0% { left: -70%; } 60%, 100% { left: 130%; } }
+@keyframes partnerShine { from { left: -75%; } to { left: 135%; } }
 @media (prefers-reduced-motion: reduce) {
-  .partner-logo, .partner-card::after { animation: none; }
+  .partner-logo { animation: none; }
   .partner-card:hover { transform: none; }
+  .partner-card:hover::after { animation: none; }
 }
