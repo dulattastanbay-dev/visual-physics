@@ -9,14 +9,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/visual-physics-logo.svg?v=2" />
   <script defer src="script.js"></script>
+  <script defer src="viz.js"></script>
 </head>
 <body>
 
 <header class="header">
   <div class="container header__inner">
     <a class="brand" href="index.html" aria-label="Visual Physics home">
-      <img class="brand__logo" src="assets/logotip.jpeg" alt="Visual Physics logo">
+      <img class="brand__logo" src="assets/visual-physics-logo.svg" alt="Visual Physics logo">
       <span class="brand__name">Visual Physics</span>
     </a>
     <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="primaryNav">
@@ -47,14 +49,14 @@
       <span class="hero__eyebrow" data-i18n="hero.eyebrow">✦ Образовательный проект для школ</span>
       <h1 class="h1" data-i18n="hero.h1">Делаем физику понятной через интерактивные визуализации и эксперименты</h1>
       <p class="lead" data-i18n="hero.lead">Мы превращаем абстрактные формулы в наглядные модели, симуляции и практические занятия, чтобы ученики реально понимали, а не заучивали.</p>
-      <p class="hero-desc" data-i18n="hero.desc">Наши модели устанавливаются прямо в школах и используются учителями на уроках — без поездок в музеи и без дополнительного оборудования.</p>
+      <p class="hero-desc" data-i18n="hero.desc">Наши модели устанавливаются в школьных коридорах и открытых учебных зонах, чтобы ученики могли подходить к ним в любой момент, а учителя — быстро связывать опыт с темой урока.</p>
       <div class="hero__actions">
         <a class="btn btn--primary" href="contacts.html" data-i18n="nav.cta">Оставить заявку для вашей школы</a>
         <a class="btn" href="object.html" data-i18n="hero.cta2">Смотреть проекты</a>
       </div>
       <div class="hero__stats">
-        <div class="hero__stat"><b data-count="6">6</b><span data-i18n="hero.stat1">готовых моделей</span></div>
-        <div class="hero__stat"><b data-count="3">3</b><span data-i18n="hero.stat2">школы-партнёра</span></div>
+        <div class="hero__stat"><b data-count="10">10</b><span data-i18n="hero.stat1">готовых моделей</span></div>
+        <div class="hero__stat"><b data-count="3">3</b><span data-i18n="hero.stat2">пилотные школы</span></div>
         <div class="hero__stat"><b data-count="100" data-suffix="%">100%</b><span data-i18n="hero.stat3">наглядно и безопасно</span></div>
       </div>
     </div>
@@ -89,8 +91,8 @@
     <p class="p" data-i18n="why.intro">Большинство школьников не понимают физику не потому, что «слабые», а потому что её часто объясняют слишком абстрактно. Мы закрываем этот разрыв</p>
     <div class="cards cards--numbered">
       <div class="card"><h3 data-i18n="why.c1t">Слишком абстрактно</h3><p data-i18n="why.c1d">Формулы без интуиции и связи с реальными явлениями</p></div>
-      <div class="card"><h3 data-i18n="why.c2t">Мало наглядности</h3><p data-i18n="why.c2d">Недостаточно визуальных моделей и экспериментов в классе</p></div>
-      <div class="card"><h3 data-i18n="why.c3t">Падает вовлечённость</h3><p data-i18n="why.c3d">Ученики теряют интерес и начинают бояться ошибок</p></div>
+      <div class="card"><h3 data-i18n="why.c2t">Мало наглядности</h3><p data-i18n="why.c2d">Недостаточно визуальных моделей, которые можно увидеть и запустить самостоятельно</p></div>
+      <div class="card"><h3 data-i18n="why.c3t">Падает вовлечённость</h3><p data-i18n="why.c3d">Ученики быстро теряют интерес, если не видят связь формулы с реальным явлением</p></div>
     </div>
   </div>
 </section>
@@ -119,8 +121,8 @@
             <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
         </div>
-        <h3 data-i18n="give.f2t">Понятные объяснения</h3>
-        <p data-i18n="give.f2d">Коротко и по делу: смысл, примеры, типичные ошибки</p>
+        <h3 data-i18n="give.f2t">Разбор эксперимента</h3>
+        <p data-i18n="give.f2d">Коротко и по делу: суть явления, формула и связь с реальной жизнью</p>
       </div>
 
       <div class="card">
@@ -174,7 +176,7 @@
           <rect x="15" y="12" width="3.5" height="3" rx="0.5"/>
         </svg>
       </span>
-      <span data-i18n-html="give.note"><strong>Всё это — прямо в вашей школе.</strong> Физические модели и интерактивные установки Visual Physics монтируются в классе и используются учителями на каждом уроке. Без поездок, без специального оборудования.</span>
+      <span data-i18n-html="give.note"><strong>Всё это — прямо в вашей школе.</strong> Физические модели Visual Physics размещаются в коридорах и открытых зонах: ученики подходят к ним между уроками, запускают опыт сами и лучше понимают связь с темой занятия.</span>
     </div>
   </div>
 </section>
@@ -202,65 +204,104 @@
         <div class="proj-track" id="projTrack">
 
           <div class="proj-card">
-            <div class="proj-card__media"><img src="modelki/stul.png" alt="Модель «Стул с шариками»"><span>01</span></div>
+            <div class="proj-card__media"><img src="modelki/m1-davlenie.jpg" alt="Давление: секрет безопасных гвоздей"><span>01</span></div>
             <div class="proj-card__body">
-              <span class="chip" data-i18n="chip.mech">Механика</span>
-              <h3 data-i18n="proj.t1">Стул с шариками</h3>
-              <p data-i18n="proj.d1">Наглядная инерция: основание двигается, а шарики «отстают».</p>
-              <a class="btn btn--small" href="stuldetail.html" data-i18n="proj.more">Подробнее</a>
+              <span class="chip" data-i18n="m1c">Давление</span>
+              <h3 data-i18n="m1t">Давление: секрет безопасных гвоздей</h3>
+              <p data-i18n="m1d">Сесть на сотни гвоздей — и не больно: вес распределяется на множество точек.</p>
+              <a class="btn btn--small" href="davlenie.html" data-i18n="proj.more">Подробнее</a>
             </div>
           </div>
 
           <div class="proj-card">
-            <div class="proj-card__media"><img src="modelki/gruziki.png" alt="Модель веса тела в жидкости"><span>02</span></div>
+            <div class="proj-card__media"><img src="modelki/m2-centrifuga.jpg" alt="Центробежная сила: вращающиеся грузы"><span>02</span></div>
             <div class="proj-card__body">
-              <span class="chip" data-i18n="chip.arch">Закон Архимеда</span>
-              <h3 data-i18n="proj.t2">Вес тела в жидкости</h3>
-              <p data-i18n="proj.d2">В воде груз «легчает» — видно выталкивающую силу Архимеда.</p>
-              <a class="btn btn--small" href="gruzikidetail.html" data-i18n="proj.more">Подробнее</a>
+              <span class="chip" data-i18n="m2c">Вращение</span>
+              <h3 data-i18n="m2t">Центробежная сила: вращающиеся грузы</h3>
+              <p data-i18n="m2d">Раскрути колесо — и грузы на рычагах сами отъезжают от центра наружу.</p>
+              <a class="btn btn--small" href="centrifuga.html" data-i18n="proj.more">Подробнее</a>
             </div>
           </div>
 
           <div class="proj-card">
-            <div class="proj-card__media"><img src="modelki/brownstol.png" alt="Модель броуновского движения"><span>03</span></div>
+            <div class="proj-card__media"><img src="modelki/m3-polispast.jpg" alt="Золотое правило механики: подъём без усилий"><span>03</span></div>
             <div class="proj-card__body">
-              <span class="chip" data-i18n="chip.thermo">Термодинамика</span>
-              <h3 data-i18n="proj.t3">Броуновское движение</h3>
-              <p data-i18n="proj.d3">Шарики на вибростоле движутся как молекулы — модель тепла.</p>
-              <a class="btn btn--small" href="brownstoldetail.html" data-i18n="proj.more">Подробнее</a>
+              <span class="chip" data-i18n="m3c">Простые механизмы</span>
+              <h3 data-i18n="m3t">Золотое правило механики: подъём без усилий</h3>
+              <p data-i18n="m3d">Сядь и потяни канат — поднимешь сам себя. Блоки дают выигрыш в силе.</p>
+              <a class="btn btn--small" href="polispast.html" data-i18n="proj.more">Подробнее</a>
             </div>
           </div>
 
           <div class="proj-card">
-            <div class="proj-card__media"><img src="modelki/kolesomodel.png" alt="Модель велоколеса на раме"><span>04</span></div>
+            <div class="proj-card__media"><img src="modelki/m4-giroskop.jpg" alt="Закон сохранения момента импульса: упрямое колесо"><span>04</span></div>
             <div class="proj-card__body">
-              <span class="chip" data-i18n="chip.mech">Механика</span>
-              <h3 data-i18n="proj.t4">Велоколесо на раме</h3>
-              <p data-i18n="proj.d4">Гироскоп: раскрученное колесо держит ось и удивляет учеников.</p>
-              <a class="btn btn--small" href="kolesodetail.html" data-i18n="proj.more">Подробнее</a>
+              <span class="chip" data-i18n="m4c">Механика</span>
+              <h3 data-i18n="m4t">Закон сохранения момента импульса: упрямое колесо</h3>
+              <p data-i18n="m4d">Раскрученное колесо упрямо держит ось — гироскопический эффект.</p>
+              <a class="btn btn--small" href="giroskop.html" data-i18n="proj.more">Подробнее</a>
             </div>
           </div>
 
           <div class="proj-card">
-            <div class="proj-card__media"><img src="modelki/blokverevka.png" alt="Модель блочной системы"><span>05</span></div>
+            <div class="proj-card__media"><img src="modelki/m5-mayatniki.jpg" alt="Закон Галилея: равенство маятников"><span>05</span></div>
             <div class="proj-card__body">
-              <span class="chip" data-i18n="chip.mech">Механика</span>
-              <h3 data-i18n="proj.t5">Блочная система</h3>
-              <p data-i18n="proj.d5">Поднимаем груз меньшим усилием — золотое правило механики.</p>
-              <a class="btn btn--small" href="blokverevkadetail.html" data-i18n="proj.more">Подробнее</a>
-            </div>
-          </div>
-	  
-	  <div class="proj-card">
-            <div class="proj-card__media"><img src="modelki/naborgruzikov.png" alt="Набор металлических грузов"><span>06</span></div>
-            <div class="proj-card__body">
-              <span class="chip" data-i18n="chip.density">Плотность</span>
-              <h3 data-i18n="proj.t6">Набор металлических грузов</h3>
-              <p data-i18n="proj.d6">Равный объём, разная масса — ученики «нащупывают» плотность.</p>
-              <a class="btn btn--small" href="naborgruzikovdetail.html" data-i18n="proj.more">Подробнее</a>
+              <span class="chip" data-i18n="m5c">Колебания</span>
+              <h3 data-i18n="m5t">Закон Галилея: равенство маятников</h3>
+              <p data-i18n="m5d">Маятники разной массы, но одной длины качаются в такт.</p>
+              <a class="btn btn--small" href="mayatniki.html" data-i18n="proj.more">Подробнее</a>
             </div>
           </div>
 
+          <div class="proj-card">
+            <div class="proj-card__media"><img src="modelki/m6-ravnodeistvuyushaya.jpg" alt="Равнодействующая двух сил: сердце на канатах"><span>06</span></div>
+            <div class="proj-card__body">
+              <span class="chip" data-i18n="m6c">Силы</span>
+              <h3 data-i18n="m6t">Равнодействующая двух сил: сердце на канатах</h3>
+              <p data-i18n="m6d">Тяни два каната — и ведёшь сердце по полю, складывая две силы в одну.</p>
+              <a class="btn btn--small" href="ravnodeystvie.html" data-i18n="proj.more">Подробнее</a>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-card__media"><img src="modelki/m7-labirint.jpg" alt="Гравитационный лабиринт: путь случайности"><span>07</span></div>
+            <div class="proj-card__body">
+              <span class="chip" data-i18n="m7c">Гравитация · хаос</span>
+              <h3 data-i18n="m7t">Гравитационный лабиринт: путь случайности</h3>
+              <p data-i18n="m7d">Чуть сдвинул точку старта — и шарик идёт совсем другим путём. Эффект бабочки.</p>
+              <a class="btn btn--small" href="labirint.html" data-i18n="proj.more">Подробнее</a>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-card__media"><img src="modelki/m8-arhimed.jpg" alt="Сила Архимеда: тело становится легче в воде"><span>08</span></div>
+            <div class="proj-card__body">
+              <span class="chip" data-i18n="m8c">Закон Архимеда</span>
+              <h3 data-i18n="m8t">Сила Архимеда: тело становится легче в воде</h3>
+              <p data-i18n="m8d">Груз в воде «легчает» — весы показывают выталкивающую силу.</p>
+              <a class="btn btn--small" href="arhimed.html" data-i18n="proj.more">Подробнее</a>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-card__media"><img src="modelki/m9-ferromagnetizm.jpg" alt="Ферромагнетизм: магнитный мост"><span>09</span></div>
+            <div class="proj-card__body">
+              <span class="chip" data-i18n="m9c">Магнетизм</span>
+              <h3 data-i18n="m9t">Ферромагнетизм: магнитный мост</h3>
+              <p data-i18n="m9d">Между магнитами вырастает цепочка из гаек — «невидимый мост».</p>
+              <a class="btn btn--small" href="ferromagnetizm.html" data-i18n="proj.more">Подробнее</a>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-card__media"><img src="modelki/m10-kulon.jpg" alt="Сила Кулона: танец электрических зарядов"><span>10</span></div>
+            <div class="proj-card__body">
+              <span class="chip" data-i18n="m10c">Электростатика</span>
+              <h3 data-i18n="m10t">Сила Кулона: танец электрических зарядов</h3>
+              <p data-i18n="m10d">Наэлектризуй перчатку — и лёгкие шарики прыгают, притягиваются и разлетаются.</p>
+              <a class="btn btn--small" href="kulon.html" data-i18n="proj.more">Подробнее</a>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -268,6 +309,87 @@
 
     <div style="margin-top:18px">
       <a class="btn" href="object.html" data-i18n="proj.openall">Открыть все проекты</a>
+    </div>
+  </div>
+</section>
+
+<!-- Визуализации работы моделей ----------------------------------------------------------- -->
+<section class="section section--tint vp-visuals" id="visualizations">
+  <div class="container">
+    <span class="contact-badge reveal" data-i18n="viz.badge">Визуализации</span>
+    <h2 class="h2 reveal" data-i18n="viz.h2">Как модели работают вживую</h2>
+    <p class="p reveal" data-i18n="viz.sub">Короткие анимации показывают суть эксперимента до того, как ученик подойдёт к установке.</p>
+
+    <div class="viz-grid">
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="pressure"></canvas></div>
+        <h3 data-i18n="vz.1t">Давление и гвозди</h3>
+        <p data-i18n="vz.1d">Двигайте мышь: больше гвоздей — меньше давление, садиться не больно.</p>
+        <a href="davlenie.html" data-i18n="proj.more">Подробнее</a>
+      </article>
+
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="centrifuga"></canvas></div>
+        <h3 data-i18n="vz.2t">Центробежная сила</h3>
+        <p data-i18n="vz.2d">Двигайте мышь: чем выше скорость, тем дальше грузы отходят от центра.</p>
+        <a href="centrifuga.html" data-i18n="proj.more">Подробнее</a>
+      </article>
+
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="polispast"></canvas></div>
+        <h3 data-i18n="vz.3t">Золотое правило механики</h3>
+        <p data-i18n="vz.3d">Двигайте мышь: больше блоков — меньше нужная сила.</p>
+        <a href="polispast.html" data-i18n="proj.more">Подробнее</a>
+      </article>
+
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="gyro"></canvas></div>
+        <h3 data-i18n="vz.4t">Гироскоп</h3>
+        <p data-i18n="vz.4d">Нажмите, чтобы раскрутить колесо — оно начинает держать ось.</p>
+        <a href="giroskop.html" data-i18n="proj.more">Подробнее</a>
+      </article>
+
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="mayatniki"></canvas></div>
+        <h3 data-i18n="vz.5t">Маятники Галилея</h3>
+        <p data-i18n="vz.5d">Меняйте длину мышью: грузы разной массы качаются в один период.</p>
+        <a href="mayatniki.html" data-i18n="proj.more">Подробнее</a>
+      </article>
+
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="ravnodeystvie"></canvas></div>
+        <h3 data-i18n="vz.6t">Сложение сил</h3>
+        <p data-i18n="vz.6d">Тяните две стрелки — фиолетовая показывает равнодействующую.</p>
+        <a href="ravnodeystvie.html" data-i18n="proj.more">Подробнее</a>
+      </article>
+
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="labirint"></canvas></div>
+        <h3 data-i18n="vz.7t">Гравитационный лабиринт</h3>
+        <p data-i18n="vz.7d">Нажимайте сверху и роняйте шарики — путь каждый раз другой.</p>
+        <a href="labirint.html" data-i18n="proj.more">Подробнее</a>
+      </article>
+
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="arhimed"></canvas></div>
+        <h3 data-i18n="vz.8t">Сила Архимеда</h3>
+        <p data-i18n="vz.8d">Опускайте груз в воду — его кажущийся вес уменьшается.</p>
+        <a href="arhimed.html" data-i18n="proj.more">Подробнее</a>
+      </article>
+
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="ferromagnetizm"></canvas></div>
+        <h3 data-i18n="vz.9t">Ферромагнетизм</h3>
+        <p data-i18n="vz.9d">Двигайте магнит — гайки тянутся к нему и строят мост.</p>
+        <a href="ferromagnetizm.html" data-i18n="proj.more">Подробнее</a>
+      </article>
+
+      <article class="viz-card reveal">
+        <div class="viz-canvas-wrap"><canvas class="viz-canvas" data-sim="kulon"></canvas></div>
+        <h3 data-i18n="vz.10t">Сила Кулона</h3>
+        <p data-i18n="vz.10d">Двигайте заряд, клик меняет знак — притяжение или отталкивание.</p>
+        <a href="kulon.html" data-i18n="proj.more">Подробнее</a>
+      </article>
     </div>
   </div>
 </section>
@@ -298,35 +420,6 @@
   </div>
 </section>
 
-<!-- Где применяется -->
-<section class="section section--tint" id="applications">
-  <div class="container">
-    <span class="contact-badge reveal" data-i18n="app.eye">Область применения</span>
-    <h2 class="h2 reveal" data-i18n="app.h2">Один набор — несколько сред, где он нужен</h2>
-    <p class="p reveal" data-i18n="app.sub">Visual Physics помогает не только на школьном уроке.</p>
-    <div class="app-grid">
-      <article class="app-card app-card--violet reveal">
-        <div class="app-card__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></svg></div>
-        <h3 data-i18n="app.c1t">Школы и уроки</h3>
-        <p data-i18n="app.c1d">Модели на каждом уроке физики — без поездок и спецоборудования.</p>
-        <a class="app-card__link" href="contacts.html"><span data-i18n="proj.more">Подробнее</span></a>
-      </article>
-      <article class="app-card app-card--blue reveal">
-        <div class="app-card__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg></div>
-        <h3 data-i18n="app.c2t">Кружки и центры</h3>
-        <p data-i18n="app.c2d">Наглядные опыты для дополнительных занятий и научных кружков.</p>
-        <a class="app-card__link" href="contacts.html"><span data-i18n="proj.more">Подробнее</span></a>
-      </article>
-      <article class="app-card app-card--cyan reveal">
-        <div class="app-card__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <h3 data-i18n="app.c3t">Дом и семья</h3>
-        <p data-i18n="app.c3d">Безопасные модели, с которыми ребёнок изучает физику дома.</p>
-        <a class="app-card__link" href="contacts.html"><span data-i18n="proj.more">Подробнее</span></a>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- Как мы пришли к Visual Physics (музеи) ----------------------------------------------------------- -->
 <section class="section section--tint">
   <div class="container">
@@ -336,7 +429,7 @@
     <div class="museum-layout">
       <div class="museum-text">
         <p data-i18n="mus.p1">В лучших научных музеях мира физику не зубрят — её трогают руками. Посетители крутят, толкают, запускают экспонаты и сами видят, как работают законы природы.</p>
-        <p data-i18n="mus.p2">Мы вдохновились этим подходом и задались вопросом: почему такие установки должны быть только в музеях больших городов? Так появился Visual Physics — мы приносим «музей науки» прямо в школьный класс.</p>
+        <p data-i18n="mus.p2">Мы вдохновились этим подходом и задались вопросом: почему такие установки должны быть только в музеях больших городов? Так появился Visual Physics — мы приносим «музей науки» прямо в школьные коридоры и открытые учебные зоны.</p>
         <p data-i18n="mus.p3">Каждая наша модель — это маленький интерактивный экспонат, с которым ученик взаимодействует на обычном уроке.</p>
         <a class="btn btn--primary" href="object.html" style="margin-top:6px" data-i18n="hero.cta2">Смотреть проекты</a>
       </div>
@@ -378,7 +471,7 @@
 <!--  Школы ------------------------------------------------------------->
 <section class="section" id="schools">
   <div class="container">
-    <h2 class="h2" data-i18n="sch.h2">Школы, с которыми мы сотрудничаем</h2>
+    <h2 class="h2" data-i18n="sch.h2">Пилотные школы</h2>
 
     <div class="sc-wrap">
       <button class="sc-arrow sc-arrow--left" id="schoolsLeft" type="button" aria-label="Предыдущая школа">
@@ -450,22 +543,6 @@
 
     </div>
 
-    <div style="margin-top:28px">
-      <div class="card">
-        <h3 style="margin-top:0; font-size:16px;" data-i18n="sup.othertitle">Другие проекты SM</h3>
-        <p data-i18n-html="sup.otherdesc">Visual Physics один из проектов SM. <br>Другие проекты SM:</p>
-        <div class="list">
-          <a class="linkbtn" href="https://www.sensoryroom.kz/" target="_blank" rel="noopener">
-            <span><b>sensory rooms</b></span>
-            <span aria-hidden="true">↗</span>
-          </a>
-          <a class="linkbtn" href="https://www.sensoryroom.kz/sensory-kits/" target="_blank" rel="noopener">
-            <span><b>sensory kids</b></span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -474,7 +551,7 @@
   <div class="container cta-band__inner">
     <div>
       <h2 class="cta-band__title" data-i18n="cta.title">Готовы показать ученикам физику вживую?</h2>
-      <p class="cta-band__sub" data-i18n="cta.sub">Оставьте заявку — подберём модели под вашу программу и установим прямо в классе. Это бесплатно и ни к чему не обязывает.</p>
+      <p class="cta-band__sub" data-i18n="cta.sub">Оставьте заявку — подберём модели под вашу программу и предложим формат установки в коридоре или открытой учебной зоне. Это бесплатно и ни к чему не обязывает.</p>
     </div>
     <a class="cta-band__btn" href="contacts.html" data-i18n="cta.btn">Оставить заявку</a>
   </div>
@@ -491,10 +568,6 @@
       <a href="object.html" data-i18n="footer.projects">О наших проектах</a>
       <a href="index.html#support" data-i18n="footer.support">Поддержать проект</a>
       <a href="contacts.html" data-i18n="footer.request">Оставить заявку</a>
-      <a href="https://www.instagram.com/visual.physics_/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:999px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;font-size:13px;font-weight:700;text-decoration:none;transition:opacity .18s,transform .18s;box-shadow:0 3px 12px rgba(220,39,67,.3)" onmouseover="this.style.opacity='.85';this.style.transform='translateY(-2px)'" onmouseout="this.style.opacity='1';this.style.transform='none'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        Instagram
-      </a>
     </div>
   </div>
 </footer>

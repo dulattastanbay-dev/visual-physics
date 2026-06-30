@@ -1,0 +1,58 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Visual Physics atom logo">
+  <defs>
+    <radialGradient id="vp-bg" cx="36%" cy="26%" r="88%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="54%" stop-color="#F2F0FF"/>
+      <stop offset="100%" stop-color="#E9FBFF"/>
+    </radialGradient>
+    <radialGradient id="vp-core" cx="35%" cy="28%" r="76%">
+      <stop offset="0%" stop-color="#BFA7FF"/>
+      <stop offset="44%" stop-color="#7C5CFF"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </radialGradient>
+    <linearGradient id="vp-purple" x1="126" y1="60" x2="365" y2="447" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5B4BFF"/>
+      <stop offset="0.5" stop-color="#A56CF5"/>
+      <stop offset="1" stop-color="#6D5EF6"/>
+    </linearGradient>
+    <linearGradient id="vp-cyan" x1="35" y1="278" x2="476" y2="238" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7BE8F0"/>
+      <stop offset="0.55" stop-color="#7DE2EB"/>
+      <stop offset="1" stop-color="#09B6D4"/>
+    </linearGradient>
+    <filter id="vp-shadow" x="-20%" y="-20%" width="140%" height="150%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="26" flood-color="#4F46E5" flood-opacity="0.22"/>
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#06B6D4" flood-opacity="0.12"/>
+    </filter>
+    <filter id="vp-glow" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.35 0 0 0 0 0.24 0 0 0 0 1 0 0 0 0.42 0"/>
+      <feBlend in="SourceGraphic"/>
+    </filter>
+  </defs>
+
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#vp-bg)"/>
+  <circle cx="256" cy="256" r="168" stroke="#DCD8FF" stroke-width="2" stroke-dasharray="7 12" opacity="0.85"/>
+  <g opacity="0.42">
+    <path d="M74 155L112 126L166 146L211 105L268 119L322 79L379 100" stroke="#9A8CFF" stroke-width="2"/>
+    <path d="M314 377L354 344L398 366L442 319" stroke="#9A8CFF" stroke-width="2"/>
+    <circle cx="112" cy="126" r="4" fill="#06B6D4"/>
+    <circle cx="211" cy="105" r="4" fill="#06B6D4"/>
+    <circle cx="322" cy="79" r="4" fill="#7C5CFF"/>
+    <circle cx="398" cy="366" r="4" fill="#7C5CFF"/>
+  </g>
+
+  <g filter="url(#vp-shadow)">
+    <ellipse cx="256" cy="256" rx="220" ry="73" transform="rotate(-8 256 256)" stroke="url(#vp-cyan)" stroke-width="13" stroke-linecap="round"/>
+    <ellipse cx="256" cy="256" rx="88" ry="205" transform="rotate(5 256 256)" stroke="url(#vp-purple)" stroke-width="13" stroke-linecap="round"/>
+    <ellipse cx="256" cy="256" rx="88" ry="205" transform="rotate(54 256 256)" stroke="url(#vp-purple)" stroke-width="13" stroke-linecap="round" opacity="0.84"/>
+    <circle cx="256" cy="256" r="58" fill="url(#vp-core)" filter="url(#vp-glow)"/>
+    <circle cx="256" cy="256" r="58" stroke="white" stroke-opacity="0.28" stroke-width="3"/>
+    <circle cx="143" cy="114" r="23" fill="#734BFF"/>
+    <circle cx="143" cy="114" r="23" stroke="#C9B6FF" stroke-opacity="0.62" stroke-width="3"/>
+    <circle cx="423" cy="273" r="21" fill="#06B6D4"/>
+    <circle cx="423" cy="273" r="21" stroke="#B9F7FF" stroke-opacity="0.7" stroke-width="3"/>
+    <circle cx="94" cy="354" r="20" fill="#4F46E5"/>
+    <circle cx="94" cy="354" r="20" stroke="#B8C0FF" stroke-opacity="0.62" stroke-width="3"/>
+  </g>
+</svg>

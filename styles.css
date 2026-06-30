@@ -2743,6 +2743,187 @@ body::before {
   color: var(--c-violet);
 }
 
+/* VISUAL DEMOS + CLEAN TOP LANGUAGE SWITCHER */
+.brand__logo {
+  object-fit: contain;
+  padding: 0;
+  background: transparent;
+  border-radius: 14px;
+}
+
+.header__inner {
+  padding-right: 150px;
+}
+
+.vp-lang {
+  position: fixed;
+  top: max(8px, env(safe-area-inset-top));
+  right: 14px;
+  z-index: 1400;
+  box-shadow: 0 12px 30px rgba(31,41,86,.16);
+  border-color: rgba(99,102,241,.22);
+}
+
+.vp-visuals {
+  overflow: hidden;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.viz-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 330px;
+  padding: 18px;
+  border: 1px solid rgba(99,102,241,.16);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(129,140,248,.18), transparent 34%),
+    linear-gradient(145deg, rgba(255,255,255,.96), rgba(244,247,255,.88));
+  box-shadow: 0 18px 45px rgba(55,62,120,.11);
+}
+
+.viz-card::before {
+  content: '';
+  position: absolute;
+  inset: -35% -20% auto auto;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 1px solid rgba(79,70,229,.12);
+  box-shadow: 0 0 0 18px rgba(6,182,212,.035), 0 0 0 36px rgba(124,58,237,.025);
+}
+
+.viz-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: 16px 0 8px;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 19px;
+  color: var(--navy);
+}
+
+.viz-card p {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 12px;
+  color: var(--muted);
+  line-height: 1.62;
+  font-size: 14px;
+}
+
+.viz-card a {
+  position: relative;
+  z-index: 1;
+  color: var(--navy);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.viz-stage {
+  position: relative;
+  height: 155px;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.9), rgba(232,238,255,.7)),
+    repeating-linear-gradient(90deg, rgba(79,70,229,.07) 0 1px, transparent 1px 24px);
+  border: 1px solid rgba(79,70,229,.12);
+  overflow: hidden;
+}
+
+.viz-track { position: absolute; left: 22px; right: 22px; bottom: 35px; height: 8px; border-radius: 99px; background: #132041; box-shadow: inset 0 2px 4px rgba(255,255,255,.25); }
+.viz-cart { position: absolute; left: 38px; bottom: 43px; width: 120px; height: 38px; border-radius: 14px; background: linear-gradient(135deg, #d9b36a, #f2ddaa); box-shadow: 0 12px 20px rgba(20,24,70,.12); animation: vizCart 2.8s cubic-bezier(.36,.03,.2,.98) infinite; }
+.viz-ball { position: absolute; bottom: 91px; width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle at 30% 25%, #fff, #aeb7c8 35%, #25304f 100%); box-shadow: 0 6px 12px rgba(0,0,0,.12); animation: vizBallLag 2.8s cubic-bezier(.36,.03,.2,.98) infinite; }
+.viz-ball--a { left: 56px; }
+.viz-ball--b { left: 98px; animation-delay: -.14s; }
+.viz-ball--c { left: 140px; animation-delay: -.28s; }
+@keyframes vizCart { 0%,100% { transform: translateX(0); } 45%,65% { transform: translateX(60px); } }
+@keyframes vizBallLag { 0%,100% { transform: translateX(0); } 45%,65% { transform: translateX(30px); } }
+
+.viz-beaker { position:absolute; left:50%; bottom:24px; width:98px; height:100px; transform:translateX(-50%); border:3px solid rgba(20,31,63,.28); border-top-width:2px; border-radius:10px 10px 18px 18px; background:rgba(255,255,255,.38); }
+.viz-water { position:absolute; left:50%; bottom:27px; width:92px; height:54px; transform:translateX(-50%); border-radius:0 0 15px 15px; background:linear-gradient(180deg, rgba(80,210,244,.35), rgba(37,99,235,.3)); animation: vizWater 2.6s ease-in-out infinite; }
+.viz-scale { position:absolute; left:50%; top:17px; width:3px; height:70px; background:#b58938; transform:translateX(-50%); }
+.viz-load { position:absolute; left:50%; top:75px; width:42px; height:42px; transform:translateX(-50%); border-radius:12px; background:linear-gradient(135deg,#d4d8df,#3b4352); animation: vizFloat 2.6s ease-in-out infinite; }
+.viz-arrow-up { position:absolute; left:calc(50% + 36px); bottom:53px; width:12px; height:42px; border-radius:99px; background:linear-gradient(#22d3ee,#4f46e5); animation: vizArrow 2.6s ease-in-out infinite; }
+.viz-arrow-up::before { content:''; position:absolute; left:50%; top:-8px; transform:translateX(-50%) rotate(45deg); width:13px; height:13px; border-left:3px solid #22d3ee; border-top:3px solid #22d3ee; }
+@keyframes vizWater { 50% { transform:translateX(-50%) translateY(-3px); } }
+@keyframes vizFloat { 50% { transform:translateX(-50%) translateY(-11px); } }
+@keyframes vizArrow { 50% { opacity:.55; transform:translateY(-8px); } }
+
+.viz-box { position:absolute; inset:24px; border:2px solid rgba(20,31,63,.18); border-radius:18px; background:rgba(255,255,255,.38); }
+.viz-particle { position:absolute; width:15px; height:15px; border-radius:50%; background:radial-gradient(circle at 30% 25%,#fff,#c7ccd8 32%,#5a6478); box-shadow:0 0 12px rgba(79,70,229,.22); animation: vizBrown 3.1s linear infinite; }
+.p1 { left:46px; top:42px; animation-delay:-.2s; }
+.p2 { left:132px; top:74px; animation-delay:-.9s; }
+.p3 { left:215px; top:46px; animation-delay:-1.3s; }
+.p4 { left:76px; top:108px; animation-delay:-1.8s; }
+.p5 { left:185px; top:112px; animation-delay:-2.2s; }
+.p6 { left:240px; top:92px; animation-delay:-2.7s; }
+@keyframes vizBrown { 0%{transform:translate(0,0)} 25%{transform:translate(22px,-13px)} 50%{transform:translate(-10px,20px)} 75%{transform:translate(18px,12px)} 100%{transform:translate(0,0)} }
+
+.viz-stand { position:absolute; left:42px; right:42px; bottom:35px; height:16px; border-radius:10px; background:#132041; }
+.viz-axis { position:absolute; left:48px; right:48px; top:75px; height:7px; border-radius:99px; background:#9aa4b5; }
+.viz-wheel { position:absolute; left:50%; top:30px; width:90px; height:90px; margin-left:-45px; border-radius:50%; border:11px solid #172346; background:radial-gradient(circle,#eef2ff 0 10px, #9ca3af 11px 14px, transparent 15px), conic-gradient(from 0deg, rgba(255,255,255,.9), rgba(99,102,241,.18), rgba(255,255,255,.88), rgba(6,182,212,.25)); animation: vizWheel .78s linear infinite; box-shadow:0 10px 25px rgba(20,24,70,.18); }
+@keyframes vizWheel { to { transform:rotate(360deg); } }
+
+.viz-frame { position:absolute; left:39px; right:39px; top:23px; height:90px; border:8px solid #132041; border-bottom:none; border-radius:14px 14px 0 0; }
+.viz-rope { position:absolute; left:50%; top:35px; width:76px; height:95px; transform:translateX(-50%); border-left:4px solid #e9e2d3; border-right:4px solid #e9e2d3; border-radius:0 0 30px 30px; animation: vizRope 2.5s ease-in-out infinite; }
+.viz-pulley { position:absolute; left:50%; width:38px; height:38px; margin-left:-19px; border-radius:50%; border:6px solid #c99834; background:#ffe6a7; }
+.viz-pulley.top { top:36px; }
+.viz-pulley.mid { top:82px; animation: vizPulley 2.5s ease-in-out infinite; }
+.viz-weight { position:absolute; left:50%; bottom:16px; width:48px; height:34px; margin-left:-24px; border-radius:9px; background:linear-gradient(135deg,#d9dce3,#556071); animation: vizWeight 2.5s ease-in-out infinite; }
+.viz-hand-force { position:absolute; right:42px; top:80px; color:#4f46e5; font-weight:900; animation: vizForce 2.5s ease-in-out infinite; }
+@keyframes vizPulley { 50% { transform:translateY(-14px); } }
+@keyframes vizWeight { 50% { transform:translateY(-14px); } }
+@keyframes vizRope { 50% { height:82px; } }
+@keyframes vizForce { 50% { transform:translate(10px,20px); } }
+
+.viz-cube { position:absolute; bottom:48px; width:42px; height:42px; border-radius:10px; box-shadow:0 14px 18px rgba(20,24,70,.14); animation: vizCube 3s ease-in-out infinite; }
+.cube-a { left:42px; background:linear-gradient(135deg,#d17b45,#9a3f21); }
+.cube-b { left:112px; background:linear-gradient(135deg,#f2d06b,#ad7c21); animation-delay:-.25s; }
+.cube-c { left:182px; background:linear-gradient(135deg,#d7dbe2,#4b5563); animation-delay:-.5s; }
+.viz-balance { position:absolute; left:35px; right:35px; bottom:36px; height:6px; border-radius:99px; background:#132041; }
+@keyframes vizCube { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+
+/* Interactive canvas simulations (viz.js) */
+.viz-canvas-wrap {
+  position: relative;
+  height: 172px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(79,70,229,.14);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(232,238,255,.7)),
+    repeating-linear-gradient(90deg, rgba(79,70,229,.06) 0 1px, transparent 1px 26px);
+}
+.viz-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: pointer;
+}
+.viz-card .viz-canvas-wrap + h3 { margin-top: 16px; }
+
+@media (max-width: 980px) {
+  .viz-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .header__inner { padding-right: 0; }
+  .vp-lang { top: 8px; right: 68px; padding: 3px; }
+  .viz-grid { grid-template-columns: 1fr; }
+  .viz-card { min-height: 304px; border-radius: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viz-card *, .viz-card *::before, .viz-card *::after { animation: none !important; }
+}
+
 .vp-chat-fab {
   background:
     radial-gradient(circle at 30% 20%, rgba(255,255,255,.58), transparent 24%),
@@ -3223,3 +3404,17 @@ body::before {
   }
   .vp-page-transition { display: none !important; }
 }
+
+/* ════════════════════════════════════════════════════════
+   CONTACT DETAILS — телефон / сайт / Instagram (из заявки)
+════════════════════════════════════════════════════════ */
+.contact-details { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.contact-detail {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 10px 16px; border-radius: 999px;
+  background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  color: var(--text); font-weight: 600; font-size: 14px;
+  transition: transform .18s, box-shadow .18s, color .18s, border-color .18s;
+}
+.contact-detail svg { color: var(--navy); flex-shrink: 0; }
+.contact-detail:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--navy); border-color: var(--navy-light); }
