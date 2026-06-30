@@ -67,7 +67,7 @@
       kk: { home: 'Басты', models: 'Модельдер', team: 'Команда', request: 'Өтінім' }
     };
     var items = [
-      { key: 'home', href: 'index.html', icon: '⌂' },
+      { key: 'home', href: '/', icon: '⌂' },
       { key: 'models', href: 'object.html', icon: '◌' },
       { key: 'team', href: 'team.html', icon: '✦' },
       { key: 'request', href: 'contacts.html', icon: '↗' }
@@ -82,6 +82,7 @@
       return labels[l] ? l : 'ru';
     }
     function isActive(href) {
+      if (href === '/') return VP_PATH === 'index.html';
       if (VP_PATH === href) return true;
       return href === 'object.html' && /detail\.html$/.test(VP_PATH);
     }
@@ -1239,11 +1240,12 @@
   (function () {
     var DICT = {
       en: {
-        'nav.team': 'Our team', 'nav.projects': 'Our projects', 'nav.support': 'Support us', 'nav.cta': 'Request for your school',
-        'footer.tagline': 'Our mission — make physics clear through visual models, simulations and experiments.',
-        'footer.team': 'Our team', 'footer.projects': 'Our projects', 'footer.support': 'Support us', 'footer.request': 'Submit a request',
+        'nav.team': 'Our team', 'nav.projects': 'Our models', 'nav.support': 'Support us', 'nav.cta': 'Request for your school',
+        'partners.h2': 'Supported by',
+        'footer.tagline': 'Our mission — make physics clear through interactive models and experiments.',
+        'footer.team': 'Our team', 'footer.projects': 'Our models', 'footer.support': 'Support us', 'footer.request': 'Submit a request',
         'hero.eyebrow': '✦ Educational project for schools',
-        'hero.h1': 'Making physics clear through interactive visualizations and experiments',
+        'hero.h1': 'Making physics clear through interactive models and experiments',
         'hero.lead': 'We turn abstract formulas into visual models, simulations and hands-on activities, so students truly understand instead of memorizing.',
         'hero.desc': 'Our models are placed in school corridors and open learning zones, so students can approach them anytime while teachers connect each experiment with the lesson topic.',
         'hero.cta1': 'Request for your school', 'hero.cta2': 'View projects',
@@ -1462,11 +1464,12 @@
         'ob.t6': 'Density of materials', 'ob.d6': 'Equal-volume weights from different metals: different mass — different density.'
       },
       kk: {
-        'nav.team': 'Біздің команда', 'nav.projects': 'Жобаларымыз', 'nav.support': 'Жобаны қолдау', 'nav.cta': 'Мектебіңізге өтінім',
-        'footer.tagline': 'Мақсатымыз — физиканы көрнекі модельдер, симуляциялар және тәжірибелер арқылы түсінікті ету.',
-        'footer.team': 'Біздің команда', 'footer.projects': 'Жобаларымыз', 'footer.support': 'Жобаны қолдау', 'footer.request': 'Өтінім қалдыру',
+        'nav.team': 'Біздің команда', 'nav.projects': 'Біздің модельдер', 'nav.support': 'Жобаны қолдау', 'nav.cta': 'Мектебіңізге өтінім',
+        'partners.h2': 'Қолдау көрсетеді',
+        'footer.tagline': 'Мақсатымыз — физиканы интерактивті модельдер мен тәжірибелер арқылы түсінікті ету.',
+        'footer.team': 'Біздің команда', 'footer.projects': 'Біздің модельдер', 'footer.support': 'Жобаны қолдау', 'footer.request': 'Өтінім қалдыру',
         'hero.eyebrow': '✦ Мектептерге арналған білім жобасы',
-        'hero.h1': 'Физиканы интерактивті визуализация мен тәжірибелер арқылы түсінікті етеміз',
+        'hero.h1': 'Физиканы интерактивті модельдер мен тәжірибелер арқылы түсінікті етеміз',
         'hero.lead': 'Біз абстрактілі формулаларды көрнекі модельдерге, симуляциялар мен практикалық сабақтарға айналдырамыз — оқушылар жаттап алмай, шынымен түсінеді.',
         'hero.desc': 'Модельдер мектеп дәліздері мен ашық оқу аймақтарына қойылады: оқушылар кез келген уақытта жақындап көре алады, ал мұғалімдер тәжірибені сабақ тақырыбымен тез байланыстырады.',
         'hero.cta1': 'Мектебіңізге өтінім', 'hero.cta2': 'Жобаларды көру',
