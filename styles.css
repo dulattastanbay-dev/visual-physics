@@ -3422,8 +3422,8 @@ body::before {
 
 /* Партнёры / при поддержке */
 .partners-row { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; margin-top: 22px; }
-.partner-card { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 22px 30px; border: 1px solid rgba(79,70,229,.14); border-radius: 20px; background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(244,247,255,.85)); box-shadow: 0 14px 36px rgba(55,62,120,.09); }
-.partner-logo { max-height: 60px; max-width: 220px; object-fit: contain; }
+.partner-card { display: flex; align-items: center; justify-content: center; padding: 26px 48px; border: 1px solid rgba(79,70,229,.12); border-radius: 22px; background: #fff; box-shadow: 0 16px 40px rgba(55,62,120,.10); }
+.partner-logo { max-height: 96px; max-width: 320px; width: 100%; object-fit: contain; }
 .partner-name { font-family: 'Manrope', system-ui, sans-serif; font-weight: 800; color: var(--navy); letter-spacing: .2px; }
 
 /* Отступ снизу, чтобы плавающее меню (dock) и чат не перекрывали нижний контент */
