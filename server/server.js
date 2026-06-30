@@ -88,6 +88,7 @@ setInterval(() => {
 async function serveStatic(pathname, req, res) {
   let rel = decodeURIComponent(pathname);
   if (rel === '/' || rel === '') rel = '/index.html';
+  if (!extname(rel) && !rel.endsWith('/')) rel += '.html'; // чистые URL: /models -> /models.html
 
   // запрет на доступ к серверу, скрытым файлам и обходу путей
   const segments = rel.split('/').filter(Boolean);

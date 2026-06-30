@@ -5,14 +5,14 @@
      иначе (JS отключён) контент остаётся видимым. */
   document.documentElement.classList.add('vp-js');
   document.body.classList.add('vp-booting');
-  var VP_PATH = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  var VP_PATH = (location.pathname.replace(/\/$/, '').split('/').pop() || 'index').toLowerCase().replace(/\.html$/, '');
   document.body.classList.add(
-    VP_PATH === 'index.html' ? 'vp-page-home' :
-    VP_PATH === 'object.html' ? 'vp-page-catalog' :
-    VP_PATH === 'team.html' ? 'vp-page-team' :
-    VP_PATH === 'contacts.html' ? 'vp-page-contacts' :
-    /detail\.html$/.test(VP_PATH) ? 'vp-page-detail' :
-    VP_PATH === 'thanks.html' ? 'vp-page-thanks' : 'vp-page-inner'
+    VP_PATH === 'index' ? 'vp-page-home' :
+    VP_PATH === 'models' ? 'vp-page-catalog' :
+    VP_PATH === 'team' ? 'vp-page-team' :
+    VP_PATH === 'contacts' ? 'vp-page-contacts' :
+    /detail$/.test(VP_PATH) ? 'vp-page-detail' :
+    VP_PATH === 'thanks' ? 'vp-page-thanks' : 'vp-page-inner'
   );
   window.addEventListener('load', function () { document.body.classList.remove('vp-booting'); });
 
@@ -68,9 +68,9 @@
     };
     var items = [
       { key: 'home', href: '/', icon: '⌂' },
-      { key: 'models', href: 'object.html', icon: '◌' },
-      { key: 'team', href: 'team.html', icon: '✦' },
-      { key: 'request', href: 'contacts.html', icon: '↗' }
+      { key: 'models', href: '/models', icon: '◌' },
+      { key: 'team', href: '/team', icon: '✦' },
+      { key: 'request', href: '/contacts', icon: '↗' }
     ];
     var dock = document.createElement('nav');
     dock.className = 'vp-smart-dock';
@@ -82,9 +82,9 @@
       return labels[l] ? l : 'ru';
     }
     function isActive(href) {
-      if (href === '/') return VP_PATH === 'index.html';
-      if (VP_PATH === href) return true;
-      return href === 'object.html' && /detail\.html$/.test(VP_PATH);
+      var slug = href === '/' ? 'index' : href.replace(/^\//, '').replace(/\.html$/, '');
+      if (slug === VP_PATH) return true;
+      return slug === 'models' && (/detail$/.test(VP_PATH) || /^(davlenie|centrifuga|polispast|giroskop|mayatniki|ravnodeystvie|labirint|arhimed|ferromagnetizm|kulon)$/.test(VP_PATH));
     }
     function renderDock() {
       var dict = labels[currentLang()];
@@ -486,7 +486,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       }).then(function (r) {
-        if (r.ok) { window.location.href = 'thanks.html'; return; }
+        if (r.ok) { window.location.href = '/thanks'; return; }
         if (r.status === 404) { // нет backend (статичный хостинг) → Netlify
           if (form.hasAttribute('data-netlify')) { nativeSubmit(); return; }
         }
