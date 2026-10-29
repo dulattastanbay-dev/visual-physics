@@ -804,7 +804,7 @@
     var mobile = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
 
     function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = 1; // фоновые точки не требуют retina-разрешения — в 4 раза меньше пикселей на кадр
       W = window.innerWidth || document.documentElement.clientWidth;
       H = window.innerHeight || document.documentElement.clientHeight;
       canvas.width = Math.round(W * dpr);
@@ -813,7 +813,7 @@
       canvas.style.height = H + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       pts = [];
-      var count = mobile ? 22 : Math.min(62, Math.max(36, Math.round(W / 26)));
+      var count = mobile ? 18 : Math.min(44, Math.max(28, Math.round(W / 36)));
       for (var i = 0; i < count; i++) {
         pts.push({
           x: Math.random() * W,
@@ -826,7 +826,12 @@
       }
     }
 
-    function draw() {
+    var last = 0;
+    function draw(now) {
+      raf = requestAnimationFrame(draw);
+      // ~30 кадров/с достаточно для медленного дрейфа и вдвое легче для GPU
+      if (now - last < 32) return;
+      last = now;
       ctx.clearRect(0, 0, W, H);
       for (var i = 0; i < pts.length; i++) {
         var p = pts[i];
@@ -864,7 +869,6 @@
         ctx.fillStyle = p.hue === 0 ? 'rgba(6,182,212,.24)' : (p.hue === 1 ? 'rgba(124,58,237,.20)' : 'rgba(79,70,229,.20)');
         ctx.fill();
       }
-      raf = requestAnimationFrame(draw);
     }
 
     function start() { if (!raf) raf = requestAnimationFrame(draw); }
@@ -877,9 +881,12 @@
       window.addEventListener('pointerleave', function () { pointer.on = false; }, { passive: true });
     }
 
-    resize(); start();
-    window.addEventListener('resize', resize, { passive: true });
-    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+    // На узких экранах canvas скрыт через CSS — не тратим кадры на невидимую анимацию
+    function sync() { if (document.hidden || !canvas.offsetWidth) stop(); else start(); }
+    var resizeT;
+    resize(); sync();
+    window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { resize(); sync(); }, 150); }, { passive: true });
+    document.addEventListener('visibilitychange', sync);
   })();
 
   (function () {
@@ -892,19 +899,20 @@
     document.body.appendChild(ring);
     var x = (window.innerWidth || document.documentElement.clientWidth) / 2;
     var y = (window.innerHeight || document.documentElement.clientHeight) / 2;
-    var rx = x, ry = y;
-    window.addEventListener('pointermove', function (e) {
-      x = e.clientX; y = e.clientY;
-      dot.style.left = x + 'px';
-      dot.style.top = y + 'px';
-    }, { passive: true });
+    var rx = x, ry = y, looping = false;
+    // transform вместо left/top — без пересчёта layout; цикл крутится только пока кольцо догоняет курсор
     function loop() {
       rx += (x - rx) * .18; ry += (y - ry) * .18;
-      ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
-      requestAnimationFrame(loop);
+      dot.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) translate(-50%,-50%)';
+      ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0) translate(-50%,-50%)';
+      if (Math.abs(x - rx) > .3 || Math.abs(y - ry) > .3) requestAnimationFrame(loop);
+      else looping = false;
     }
-    loop();
+    window.addEventListener('pointermove', function (e) {
+      x = e.clientX; y = e.clientY;
+      if (!looping) { looping = true; requestAnimationFrame(loop); }
+    }, { passive: true });
+    looping = true; requestAnimationFrame(loop);
     document.addEventListener('pointerdown', function (e) {
       var pulse = document.createElement('span');
       pulse.className = 'vp-click-pulse';
@@ -953,11 +961,16 @@
     var sel = '.proj-card, .model, .features .card, .cards--numbered .card, .museum-photo-card, .takeaway, .detail-block, .cta-block, .kpi, .contact-card, .perk, .team-member, .sc-card, .catalog-tools, .app-card, .wiw__item';
     Array.prototype.forEach.call(document.querySelectorAll(sel), function (card) {
       card.classList.add('vp-spotlight');
+      var pending = null;
       card.addEventListener('pointermove', function (e) {
-        var r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
+        if (!pending) requestAnimationFrame(function () {
+          var r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (pending.x - r.left) + 'px');
+          card.style.setProperty('--my', (pending.y - r.top) + 'px');
+          pending = null;
+        });
+        pending = { x: e.clientX, y: e.clientY };
+      }, { passive: true });
     });
   })();
 
@@ -1167,13 +1180,19 @@
     var selector = '.card, .proj-card, .model, .app-card, .wiw__item, .takeaway, .museum-photo-card, .detail-block, .kpi, .cta-block, .contact-card, .perk, .team-member, .catalog-tools';
     Array.prototype.forEach.call(document.querySelectorAll(selector), function (card) {
       card.classList.add('vp-tilt');
+      var pending = null;
       card.addEventListener('pointermove', function (event) {
-        var rect = card.getBoundingClientRect();
-        var rx = ((event.clientY - rect.top) / rect.height - .5) * -5;
-        var ry = ((event.clientX - rect.left) / rect.width - .5) * 5;
-        card.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-5px)';
-      });
-      card.addEventListener('pointerleave', function () { card.style.transform = ''; });
+        if (!pending) requestAnimationFrame(function () {
+          if (!pending) return;
+          var rect = card.getBoundingClientRect();
+          var rx = ((pending.y - rect.top) / rect.height - .5) * -5;
+          var ry = ((pending.x - rect.left) / rect.width - .5) * 5;
+          card.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-5px)';
+          pending = null;
+        });
+        pending = { x: event.clientX, y: event.clientY };
+      }, { passive: true });
+      card.addEventListener('pointerleave', function () { pending = null; card.style.transform = ''; });
     });
   })();
 
