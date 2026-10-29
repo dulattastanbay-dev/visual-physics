@@ -377,8 +377,8 @@ label    { font-weight: 700; }
   flex: 0 0 clamp(220px,36vw,400px); border: 1.5px solid var(--border);
   border-radius: var(--radius-lg); background: #fff; padding: 32px 24px 28px;
   display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;
-  opacity: .28; filter: blur(2px); transform: scale(.88);
-  transition: opacity .45s, filter .45s, transform .45s, box-shadow .45s, border-color .45s;
+  opacity: .28; transform: scale(.88);
+  transition: opacity .45s, transform .45s, box-shadow .45s, border-color .45s;
   cursor: pointer;
 }
 .sc-card.is-active { opacity: 1; filter: none; transform: scale(1); border-color: rgba(79,70,229,.38); box-shadow: 0 0 0 4px var(--navy-pale), var(--shadow-lg); cursor: default; }
@@ -2314,7 +2314,6 @@ body::before {
   height: 100%;
   pointer-events: none;
   opacity: .72;
-  mix-blend-mode: multiply;
 }
 
 .header, .hero, .section, .page, .contact-section, .cta-band, .footer {
@@ -2368,8 +2367,7 @@ body::before {
 .vp-cursor-dot {
   width: 7px;
   height: 7px;
-  left: 50vw;
-  top: 50vh;
+  will-change: transform;
   border-radius: 50%;
   background: var(--c-cyan);
   box-shadow: 0 0 18px rgba(6,182,212,.78);
@@ -2378,8 +2376,7 @@ body::before {
 .vp-cursor-ring {
   width: 34px;
   height: 34px;
-  left: 50vw;
-  top: 50vh;
+  will-change: transform;
   border: 1px solid rgba(79,70,229,.38);
   border-radius: 50%;
   box-shadow: 0 0 0 6px rgba(79,70,229,.035);
@@ -3426,8 +3423,10 @@ body::before {
 .partner-logo { max-height: 140px; max-width: 440px; object-fit: contain; }
 .partner-name { font-family: 'Manrope', system-ui, sans-serif; font-weight: 800; color: var(--navy); letter-spacing: .2px; }
 
-/* Отступ снизу, чтобы плавающее меню (dock) и чат не перекрывали нижний контент */
-body { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+/* Отступ снизу, чтобы плавающее меню (dock) и чат не перекрывали нижний контент.
+   Делаем его внутри тёмного футера, а не у body — иначе под футером остаётся белая полоса. */
+body { padding-bottom: 0; }
+.footer { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
 
 /* «Живой» логотип партнёра: лёгкое парение + реакция при наведении */
 .partner-card {
