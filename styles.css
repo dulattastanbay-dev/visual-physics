@@ -761,10 +761,15 @@ label    { font-weight: 700; }
 .vp-chat-fab__dot {
   position: absolute; top: 12px; right: 12px; width: 11px; height: 11px; border-radius: 50%;
   background: #22c55e; border: 2px solid #fff;
-  animation: vpPulse 2s ease-in-out infinite;
+}
+/* пульс через transform/opacity (анимация box-shadow перерисовывала кнопку каждый кадр) */
+.vp-chat-fab__dot::after {
+  content: ''; position: absolute; inset: -2px; border-radius: 50%;
+  background: rgba(34,197,94,.45);
+  animation: vpPulse 2s ease-out infinite;
 }
 .vp-chat-fab.is-active .vp-chat-fab__dot { display: none; }
-@keyframes vpPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,.5); } 50% { box-shadow: 0 0 0 7px rgba(34,197,94,0); } }
+@keyframes vpPulse { 0% { transform: scale(1); opacity: .9; } 70%,100% { transform: scale(2.3); opacity: 0; } }
 
 .vp-chat {
   position: fixed; right: 22px; bottom: 92px; z-index: 70;
@@ -2299,15 +2304,6 @@ body::before {
           mask-image: radial-gradient(90% 80% at 50% 0%, #000 0 35%, transparent 82%);
 }
 
-.vp-ambient-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: .72;
-}
 
 .header, .hero, .section, .page, .contact-section, .cta-band, .footer {
   position: relative;
@@ -2630,7 +2626,7 @@ body::before {
   animation: formulaScan 2.2s linear infinite;
 }
 @keyframes formulaScan {
-  to { left: 110%; }
+  to { transform: translateX(310%); }
 }
 
 .contact-section {
@@ -3040,7 +3036,6 @@ body::before {
 }
 
 @media (max-width: 760px) {
-  .vp-ambient-canvas,
   .vp-cursor-dot,
   .vp-cursor-ring,
   .vp-click-pulse { display: none; }
@@ -3091,7 +3086,6 @@ body::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vp-ambient-canvas,
   .vp-cursor-dot,
   .vp-cursor-ring,
   .vp-click-pulse { display: none !important; }
@@ -3266,7 +3260,7 @@ body::before {
   width: 28%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.78), transparent);
-  transform: skewX(-18deg);
+  transform: translateX(0) skewX(-18deg);
   animation: meterSweep 3.4s ease-in-out infinite;
 }
 .model__meter span {
@@ -3297,9 +3291,9 @@ body::before {
   text-transform: uppercase;
 }
 @keyframes meterSweep {
-  0%, 28% { left: -35%; opacity: 0; }
+  0%, 28% { transform: translateX(0) skewX(-18deg); opacity: 0; }
   45% { opacity: 1; }
-  70%,100% { left: 110%; opacity: 0; }
+  70%,100% { transform: translateX(518%) skewX(-18deg); opacity: 0; }
 }
 @keyframes meterLoad {
   from { transform: scaleX(.46); }
@@ -3317,19 +3311,19 @@ body::before {
 .detail::after {
   content: '';
   position: absolute;
-  left: -20%;
+  left: -25%;
   top: 0;
   width: 18%;
   height: 100%;
   pointer-events: none;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.34), transparent);
-  transform: skewX(-16deg);
+  transform: translateX(0) skewX(-16deg);
   animation: detailSweep 5.5s ease-in-out infinite;
 }
 @keyframes detailSweep {
-  0%, 35% { left: -25%; opacity: 0; }
+  0%, 35% { transform: translateX(0) skewX(-16deg); opacity: 0; }
   52% { opacity: 1; }
-  80%,100% { left: 120%; opacity: 0; }
+  80%,100% { transform: translateX(806%) skewX(-16deg); opacity: 0; }
 }
 
 .vp-chat.is-open {
@@ -3463,3 +3457,18 @@ body { padding-bottom: 0; }
 .vp-offscreen *,
 .vp-offscreen *::before,
 .vp-offscreen *::after { animation-play-state: paused !important; }
+
+/* Производительность: размытие фона (backdrop-filter) у закреплённых элементов
+   пересчитывалось при каждом кадре прокрутки и анимации под ними.
+   Заменяем его почти непрозрачным фоном — выглядит так же, а работает быстрее. */
+.header,
+.catalog-tools,
+.vp-chat,
+.vp-smart-dock {
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+}
+.header, .header.is-scrolled { background: rgba(255,255,255,.96); }
+.catalog-tools { background: rgba(255,255,255,.96); }
+.vp-smart-dock { background: rgba(255,255,255,.95); }
+.vp-chat { background: #fff; }
