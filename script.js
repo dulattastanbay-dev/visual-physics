@@ -14,9 +14,15 @@
     /detail$/.test(VP_PATH) ? 'vp-page-detail' :
     VP_PATH === 'thanks' ? 'vp-page-thanks' : 'vp-page-inner'
   );
-  window.addEventListener('load', function () { document.body.classList.remove('vp-booting'); });
+  // Снимаем «загрузочное» размытие сразу после построения страницы, не дожидаясь всех картинок
+  requestAnimationFrame(function () { requestAnimationFrame(function () { document.body.classList.remove('vp-booting'); }); });
 
   (function () {
+    // Заставка только при первом открытии сайта за сессию — при переходах между страницами она лишь задерживала показ
+    try {
+      if (sessionStorage.getItem('vp-seen-loader')) return;
+      sessionStorage.setItem('vp-seen-loader', '1');
+    } catch (err) {}
     var loader = document.createElement('div');
     loader.className = 'vp-loader';
     loader.setAttribute('aria-hidden', 'true');
@@ -31,8 +37,8 @@
       loader.classList.add('is-hidden');
       setTimeout(function () { loader.remove(); }, 520);
     }
-    window.addEventListener('load', function () { setTimeout(hideLoader, 260); });
-    setTimeout(hideLoader, 1800);
+    window.addEventListener('load', function () { setTimeout(hideLoader, 120); });
+    setTimeout(hideLoader, 1000);
   })();
 
   (function () {
@@ -41,6 +47,8 @@
     transition.setAttribute('aria-hidden', 'true');
     transition.innerHTML = '<span></span><span></span><span></span>';
     document.body.appendChild(transition);
+    // При возврате кнопкой «Назад» страница берётся из кэша вместе с закрытой шторкой — открываем её
+    window.addEventListener('pageshow', function () { transition.classList.remove('is-active'); });
 
     document.addEventListener('click', function (e) {
       if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
@@ -56,7 +64,7 @@
       if (url.pathname === location.pathname && url.hash) return;
       e.preventDefault();
       transition.classList.add('is-active');
-      setTimeout(function () { location.href = url.href; }, 190);
+      setTimeout(function () { location.href = url.href; }, 120);
     }, true);
   })();
 
@@ -578,9 +586,9 @@
              kk: 'Бізбен байланысу үшін «Өтінім қалдыру» бетінде телефон қалдырыңыз, біз хабарласамыз.',
              en: 'To contact us, leave your phone on the "Submit a request" page and we will call you back.' } },
       { k: ['команд', 'кто делает', 'участник', 'кім жаса', 'команда', 'team', 'who makes'],
-        a: { ru: 'Над проектом работает небольшая команда: руководитель и проектировщики, IT/веб, финансы и SMM. В команде есть Дулат Тастанбай и Омирбек Тунгышбек. Подробнее — на странице «О нашей команде».',
-             kk: 'Жоба үстінде шағын команда жұмыс істейді: жетекші және жобалаушылар, IT/веб, қаржы және SMM. Командада Дулат Тастанбай мен Омирбек Тунгышбек бар. Толығырақ — «Біздің команда» бетінде.',
-             en: 'A small team works on the project: a lead and designers, IT/web, finance and SMM. The team includes Dulat Tastanbay and Omirbek Tungyshbek. More on the "Our team" page.' } }
+        a: { ru: 'Над проектом работает небольшая команда: руководитель и проектировщики, IT/веб, расчёт финансов, CAD и графический дизайн. В команде 5 человек: Дмитрий Пилявский, Дулат Тастанбай, Омирбек Тунгышбек, Зере Турмухамбетова и Дария Баймбетова. Подробнее — на странице «О нашей команде».',
+             kk: 'Жоба үстінде шағын команда жұмыс істейді: жетекші және жобалаушылар, IT/веб, қаржылық есептеулер, CAD және графикалық дизайн. Командада 5 адам: Дмитрий Пилявский, Дулат Тастанбай, Омирбек Тунгышбек, Зере Турмухамбетова және Дария Баймбетова. Толығырақ — «Біздің команда» бетінде.',
+             en: 'A small team works on the project: a lead and designers, IT/web, financial calculations, CAD and graphic design. The team has 5 people: Dmitry Pilyavsky, Dulat Tastanbay, Omirbek Tungyshbek, Zere Turmukhambetova and Dariya Baimbetova. More on the "Our team" page.' } }
     ];
 
     function localReply(text) {
@@ -783,6 +791,18 @@
         a.setAttribute('aria-current', 'page');
       }
     });
+  })();
+
+  /* ══════════════════════════════════════════════════════
+     ПАУЗА АНИМАЦИЙ ВНЕ ЭКРАНА — бесконечные CSS-анимации в невидимых
+     секциях не тратят процессор и видеокарту
+  ══════════════════════════════════════════════════════ */
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle('vp-offscreen', !e.isIntersecting); });
+    }, { rootMargin: '120px 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('.hero, .section, .page, .contact-section, .cta-band, .team-hero, .team-roster'), function (el) { io.observe(el); });
   })();
 
   /* ══════════════════════════════════════════════════════
@@ -1056,122 +1076,29 @@
   /* ══════════════════════════════════════════════════════
      PHYSICS MOTION ENGINE — интерактивное поле и инерция
   ══════════════════════════════════════════════════════ */
-  /* Живое поле только в первом экране: эффект заметен, но не расходует ресурсы всей страницы. */
+  /* Лёгкий 3D-наклон атома в первом экране за курсором (без отдельного canvas с частицами —
+     фоновые частицы уже рисует общий слой, второй слой только нагружал видеокарту). */
   (function () {
-    if (REDUCE || !window.requestAnimationFrame) return;
+    if (REDUCE || !FINE_POINTER) return;
     var visual = document.querySelector('.hero__visual');
     if (!visual) return;
-
-    var canvas = document.createElement('canvas');
-    canvas.className = 'vp-force-field';
-    canvas.setAttribute('aria-hidden', 'true');
-    visual.insertBefore(canvas, visual.firstChild);
-    var ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    var W = 0, H = 0, dpr = 1, particles = [], raf = null, inView = true;
-    var pointer = { x: -9999, y: -9999, active: false };
-
-    function resetParticles() {
-      particles = [];
-      var count = Math.max(22, Math.min(54, Math.round(W / 11)));
-      for (var i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - .5) * .28,
-          vy: (Math.random() - .5) * .28,
-          r: Math.random() * 1.5 + .55,
-          phase: Math.random() * Math.PI * 2
-        });
-      }
-    }
-    function resize() {
-      var rect = visual.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = Math.max(1, Math.round(rect.width));
-      H = Math.max(1, Math.round(rect.height));
-      canvas.width = Math.round(W * dpr);
-      canvas.height = Math.round(H * dpr);
-      canvas.style.width = W + 'px';
-      canvas.style.height = H + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      resetParticles();
-    }
-    function draw(now) {
-      ctx.clearRect(0, 0, W, H);
-      var t = now * .001;
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        p.vx += Math.sin(t + p.phase) * .0022;
-        p.vy += Math.cos(t * .8 + p.phase) * .0022;
-        if (pointer.active) {
-          var px = pointer.x - p.x, py = pointer.y - p.y;
-          var dist2 = px * px + py * py;
-          if (dist2 < 18000 && dist2 > 25) {
-            var force = (1 - dist2 / 18000) * .012;
-            p.vx += px * force / Math.sqrt(dist2);
-            p.vy += py * force / Math.sqrt(dist2);
-          }
-        }
-        p.vx *= .992; p.vy *= .992;
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < -12) p.x = W + 12;
-        if (p.x > W + 12) p.x = -12;
-        if (p.y < -12) p.y = H + 12;
-        if (p.y > H + 12) p.y = -12;
-      }
-      for (i = 0; i < particles.length; i++) {
-        for (var j = i + 1; j < particles.length; j++) {
-          var dx = particles[i].x - particles[j].x;
-          var dy = particles[i].y - particles[j].y;
-          var distance = dx * dx + dy * dy;
-          if (distance < 4800) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = 'rgba(99,102,241,' + (.19 * (1 - distance / 4800)) + ')';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
-      for (i = 0; i < particles.length; i++) {
-        p = particles[i];
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = i % 3 === 0 ? 'rgba(6,182,212,.56)' : 'rgba(99,102,241,.52)';
-        ctx.fill();
-      }
-      if (inView) raf = requestAnimationFrame(draw);
-    }
-    function start() { if (!raf && inView) raf = requestAnimationFrame(draw); }
-    function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
-
-    if (FINE_POINTER) {
-      visual.addEventListener('pointermove', function (event) {
+    var pending = null;
+    visual.addEventListener('pointermove', function (event) {
+      if (!pending) requestAnimationFrame(function () {
+        if (!pending) return;
         var rect = visual.getBoundingClientRect();
-        pointer.x = event.clientX - rect.left;
-        pointer.y = event.clientY - rect.top;
-        pointer.active = true;
-        visual.style.setProperty('--hero-rotate-x', ((pointer.y / rect.height - .5) * -4.5).toFixed(2) + 'deg');
-        visual.style.setProperty('--hero-rotate-y', ((pointer.x / rect.width - .5) * 5.5).toFixed(2) + 'deg');
+        var x = (pending.x - rect.left) / rect.width - .5, y = (pending.y - rect.top) / rect.height - .5;
+        visual.style.setProperty('--hero-rotate-x', (y * -4.5).toFixed(2) + 'deg');
+        visual.style.setProperty('--hero-rotate-y', (x * 5.5).toFixed(2) + 'deg');
+        pending = null;
       });
-      visual.addEventListener('pointerleave', function () {
-        pointer.active = false;
-        visual.style.setProperty('--hero-rotate-x', '0deg');
-        visual.style.setProperty('--hero-rotate-y', '0deg');
-      });
-    }
-    resize(); start();
-    window.addEventListener('resize', resize, { passive: true });
-    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        inView = entries[0].isIntersecting;
-        if (inView) start(); else stop();
-      }, { threshold: .03 }).observe(visual);
-    }
+      pending = { x: event.clientX, y: event.clientY };
+    }, { passive: true });
+    visual.addEventListener('pointerleave', function () {
+      pending = null;
+      visual.style.setProperty('--hero-rotate-x', '0deg');
+      visual.style.setProperty('--hero-rotate-y', '0deg');
+    });
   })();
 
   /* Лёгкая инерция для карточек: 3D-наклон на десктопе, обычный hover на тач-устройствах. */
@@ -1465,13 +1392,11 @@
         'tm.badge': 'The Visual Physics team', 'tm.h2': 'About our team',
         'tm.intro': 'Visual Physics is built by a small team of enthusiasts: model designers, developers, finance and SMM. Everyone owns their part — from the idea and engineering to rolling models out in schools.',
         'tm.stat1': 'members', 'tm.stat2': 'models', 'tm.stat3': 'pilot schools',
-        'tm.n1': 'Dmitry Pilyavsky', 'tm.n2': 'Dulat Tastanbay', 'tm.n3': 'Omirbek Tungyshbek', 'tm.n4': 'Elnur Nurkenova', 'tm.n5': 'Eldana Mulkibayeva', 'tm.n6': 'Zere Turmukhambetova', 'tm.n7': 'Dariya Baimbetova',
-        'tm.r1': 'Project lead & Designer', 'tm.r2': 'IT & Web development', 'tm.r3': 'Designer / Engineer', 'tm.r4': 'SMM & Designer', 'tm.r5': 'Finance & Procurement', 'tm.r6': 'Designer', 'tm.r7': 'CAD designer & Graphic designer',
+        'tm.n1': 'Dmitry Pilyavsky', 'tm.n2': 'Dulat Tastanbay', 'tm.n3': 'Omirbek Tungyshbek', 'tm.n6': 'Zere Turmukhambetova', 'tm.n7': 'Dariya Baimbetova',
+        'tm.r1': 'Project lead & Designer', 'tm.r2': 'IT & Web development', 'tm.r3': 'Designer / Engineer', 'tm.r6': 'Designer', 'tm.r7': 'CAD designer & Graphic designer',
         'tm.d1': 'Leads the project and owns the engineering of the models.',
         'tm.d2': 'Develops and maintains the website, chatbot and the leads database.',
         'tm.d3': 'Designs and builds physical models for schools.',
-        'tm.d4': 'Social media, content and help with designing models.',
-        'tm.d5': 'Budget, materials procurement and team supply.',
         'tm.d6': 'Financial calculations and model design.',
         'tm.d7': '3D modelling in CAD and graphic design for the project.',
         // catalog (object.html)
@@ -1691,13 +1616,11 @@
         'tm.badge': 'Visual Physics командасы', 'tm.h2': 'Біздің команда туралы',
         'tm.intro': 'Visual Physics-ті энтузиастардың шағын командасы жасайды: модель жобалаушылары, әзірлеушілер, қаржы және SMM. Әрқайсысы өз бөлігіне жауапты — идея мен инженериядан мектептерге модель енгізуге дейін.',
         'tm.stat1': 'қатысушы', 'tm.stat2': 'модель', 'tm.stat3': 'пилоттық мектеп',
-        'tm.n1': 'Пилявский Дмитрий', 'tm.n2': 'Дулат Тастанбай', 'tm.n3': 'Омирбек Тунгышбек', 'tm.n4': 'Нуркенова Елнур', 'tm.n5': 'Эльдана Мулкибаева', 'tm.n6': 'Зере Турмухамбетова', 'tm.n7': 'Дария Баймбетова',
-        'tm.r1': 'Жоба жетекшісі & Жобалаушы', 'tm.r2': 'IT & Веб-әзірлеу', 'tm.r3': 'Жобалаушы', 'tm.r4': 'SMM & Жобалаушы', 'tm.r5': 'Қаржы & Сатып алу', 'tm.r6': 'Жобалаушы', 'tm.r7': 'CAD-дизайнер & Графикалық дизайнер',
+        'tm.n1': 'Пилявский Дмитрий', 'tm.n2': 'Дулат Тастанбай', 'tm.n3': 'Омирбек Тунгышбек', 'tm.n6': 'Зере Турмухамбетова', 'tm.n7': 'Дария Баймбетова',
+        'tm.r1': 'Жоба жетекшісі & Жобалаушы', 'tm.r2': 'IT & Веб-әзірлеу', 'tm.r3': 'Жобалаушы', 'tm.r6': 'Жобалаушы', 'tm.r7': 'CAD-дизайнер & Графикалық дизайнер',
         'tm.d1': 'Жобаны басқарады және модельдердің инженерлік бөлігіне жауап береді.',
         'tm.d2': 'Сайтты, чат-ботты және өтінімдер базасын әзірлейді әрі қолдайды.',
         'tm.d3': 'Мектептерге физикалық модельдер жобалайды және құрастырады.',
-        'tm.d4': 'Әлеуметтік желілер, контент және модельдерді жобалауға қатысу.',
-        'tm.d5': 'Бюджет, материалдар сатып алу және команданы жабдықтау.',
         'tm.d6': 'Қаржылық есептеулер және модельдерді жобалау.',
         'tm.d7': 'CAD-та 3D-модельдеу және жобаның графикалық дизайны.',
         // каталог (object.html)
