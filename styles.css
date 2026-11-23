@@ -3472,3 +3472,15 @@ body { padding-bottom: 0; }
 .catalog-tools { background: rgba(255,255,255,.96); }
 .vp-smart-dock { background: rgba(255,255,255,.95); }
 .vp-chat { background: #fff; }
+
+/* Новый логотип — круглая эмблема на прозрачном фоне: без подложки, тени и скругления */
+.brand__logo {
+  width: 46px; height: 46px;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.header.is-scrolled .brand__logo { width: 40px; height: 40px; }
+@media (max-width: 760px) {
+  .brand__logo { width: 40px; height: 40px; }
+}
